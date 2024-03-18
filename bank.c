@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*works properly, works like a charm*/
 void login(char *name, char *surname, Account *accounts, int numAccounts) {
     int i;
     int user_accounts[5];
@@ -20,6 +21,8 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
     exit(1);
 }
 
+
+/* works properly, coin change -> iban label change */
 void editAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to edit: ");
@@ -53,7 +56,26 @@ void editAccount(Account *accounts, int numAccounts) {
                     printf("2. EUR\n");
                     printf("3. USD\n");
                     printf("Enter your choice: ");
-                    scanf("%d", &accounts[i].coin);
+                    int changed_coin;
+                    scanf("%d", &changed_coin);
+                    accounts[i].coin = changed_coin;
+                    switch (changed_coin) {
+                        case 1: 
+                            accounts[i].IBAN[0]= 'R';
+                            accounts[i].IBAN[1]= 'O';
+                            break;
+                        case 2:
+                            accounts[i].IBAN[0]= 'E';
+                            accounts[i].IBAN[1]= 'U';
+                            break;
+                        case 3:
+                            accounts[i].IBAN[0]= 'U';
+                            accounts[i].IBAN[1]= 'S';
+                            break;
+                        default:
+                            printf("failed to change iban after coin conversion");
+                    } 
+                    printf("iban changed to:%s ",accounts[i].IBAN);
                     printf("Currency type updated successfully.\n");
                     break;
                 default:
@@ -65,6 +87,11 @@ void editAccount(Account *accounts, int numAccounts) {
     printf("Account not found with the given IBAN.\n");
 }
 
+
+/*work in progress delete account doesn't work properly'*/
+/*need to come up with a implementation for deleting an account*/
+/*need to make sure the user doesn't have any money in the account'*/
+/*prompt the user to transfer the money left and only then the account is available to be deleted*/
 void deleteAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to delete: ");
@@ -87,6 +114,8 @@ void deleteAccount(Account *accounts, int numAccounts) {
     printf("Account not found with the given IBAN.\n");
 }
 
+
+/*works properly*/
 void viewAccount(Account *accounts, int numAccounts) {
     // UI/UX work needed here... make it beautiful, add colors
     //
@@ -94,24 +123,30 @@ void viewAccount(Account *accounts, int numAccounts) {
     printf("Enter the IBAN of account you want to see information: ");
     scanf("%s", iban);
 
-    // #ToDo make it print information of account after the specific iban
 
-    printf("Account Details:\n");
-    printf("IBAN: %s\n", accounts[0].IBAN);
-    printf("Owner: %s %s\n", accounts[0].owner.name, accounts[0].owner.surname);
-    printf("Amount: %.2f\n", accounts[0].amount);
-    switch(accounts[0].coin) {
-        case RON:
-            printf("Currency: RON\n");
-            break;
-        case EUR:
-            printf("Currency: EUR\n");
-            break;
-        case USD:
-            printf("Currency: USD\n");
-            break;
-        default:
-            printf("Currency: Unknown\n");
+    for (int i = 0; i< numAccounts; i++) {
+        if(strcmp(accounts[i].IBAN,iban)== 0){
+           printf("check000"); 
+           printf("ac: %s", accounts[i].IBAN);
+
+           printf(">Account Details:\n");
+           printf("IBAN: %s\n", accounts[i].IBAN);
+           printf("Owner: %s %s\n", accounts[i].owner.name, accounts[i].owner.surname);
+           printf("Amount: %.2f\n", accounts[i].amount);
+           switch(accounts[i].coin) {
+               case RON:
+                   printf("Currency: RON\n");
+                   break;
+               case EUR:
+                   printf("Currency: EUR\n");
+                   break;
+               case USD:
+                   printf("Currency: USD\n");
+                   break;
+               default:
+                   printf("Currency: Unknown\n");
+           }
+        }
     }
 }
 
@@ -174,7 +209,10 @@ void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accoun
     user_accounts[k][0] = '\0'; 
 }
 
-    // Sample implementation of performing transaction
+/* doesn't work properly it sends the money to the next account'*/
+/* for now we ignore the different currencies*/
+/* implementation needed, source account from connected user -> destination account*/
+
 void performTransaction(Account *accounts, int numAccounts) {
     // For simplicity, assume a transfer between the first two accounts
     printf("Performing transaction...\n");

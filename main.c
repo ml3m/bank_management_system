@@ -19,17 +19,22 @@ int main(int argc, char *argv[]) {
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
-    for (int i =0;user_accounts[i][0]!= '\0'; i++) {
-        printf("\t%dAC:%s\n",i,user_accounts[i]); 
-    }
-    printf("MAN:%s",user_accounts[0]);
-    printf("MAN:%s",user_accounts[1]);
 
+//    for (int i =0;user_accounts[i][0]!= '\0'; i++) {
+//        printf("\t%dAC:%s\n",i,user_accounts[i]); 
+//    }
+//    printf("MAN:%s",user_accounts[0]);
+//    printf("MAN:%s",user_accounts[1]);
+//
     int choice;
     do {
         // clear terminal
 // messaged out for debugging purposes
-//        system("clear");
+        system("clear");
+
+        for (int i =0;user_accounts[i][0]!= '\0'; i++) {
+            printf("\t%dAC:%s\n",i,user_accounts[i]); 
+        }
         printf("\nWelcome %s %s !\n", name, surname);
         printf("\nBank Management System Menu:\n");
         printf("1. Edit Account\n");

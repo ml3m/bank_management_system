@@ -1,4 +1,4 @@
-#ifndef BANK_H
+#ifndef BANK_H 
 #define BANK_H
 
 #define RON 0
@@ -30,5 +30,4 @@ void deleteAccount(Account *accounts, int numAccounts);
 void viewAccount(Account *accounts, int numAccounts);
 void performTransaction(Account *accounts, int numAccounts);
 void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname);
-
 #endif /* BANK_H */
