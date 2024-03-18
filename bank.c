@@ -1,9 +1,10 @@
 #include "bank.h"
+#include "cli.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/*works properly, works like a charm*/
+/*works like a charm*/
 void login(char *name, char *surname, Account *accounts, int numAccounts) {
     int i;
     int user_accounts[5];
@@ -31,12 +32,9 @@ void editAccount(Account *accounts, int numAccounts) {
     int i;
     for (i = 0; i < numAccounts; ++i) {
         if (strcmp(iban, accounts[i].IBAN) == 0) {
+            printEditAccount(iban); 
 
-            printf("Account found. Editing account: %s\n", iban);
-            printf("1. Change owner's name\n");
-            printf("2. Change owner's surname\n");
-            printf("3. Change currency type\n");
-            printf("Enter your choice: ");
+            /*bellow switch can be included in printEditAccount() CLI fun*/
             int choice;
             scanf("%d", &choice);
             switch (choice) {

@@ -1,4 +1,5 @@
 #include "bank.h"
+#include "cli.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,30 +20,15 @@ int main(int argc, char *argv[]) {
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
-
-//    for (int i =0;user_accounts[i][0]!= '\0'; i++) {
-//        printf("\t%dAC:%s\n",i,user_accounts[i]); 
-//    }
-//    printf("MAN:%s",user_accounts[0]);
-//    printf("MAN:%s",user_accounts[1]);
-//
     int choice;
     do {
-        // clear terminal
-// messaged out for debugging purposes
+        // messaged out for debugging purposes
         system("clear");
 
-        for (int i =0;user_accounts[i][0]!= '\0'; i++) {
-            printf("\t%dAC:%s\n",i,user_accounts[i]); 
-        }
-        printf("\nWelcome %s %s !\n", name, surname);
-        printf("\nBank Management System Menu:\n");
-        printf("1. Edit Account\n");
-        printf("2. Delete Account\n");
-        printf("3. View Account\n");
-        printf("4. Perform Transaction\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
+        // CLI printing
+        printUserAccounts(user_accounts);
+        printMainMenu(name, surname);
+
         scanf("%d", &choice);
         switch(choice) {
             case 1:
