@@ -4,9 +4,9 @@
 
 int main(int argc, char *argv[]) {
 
+    char user_accounts[5][9];
     Account accounts[MAX_ACCOUNTS];
     int numAccounts = loadAccountsFromFile(accounts); 
-
     if (argc != 3) {
         printf("Usage: %s [NAME] [SURNAME]\n", argv[0]);
         return 1;
@@ -15,14 +15,22 @@ int main(int argc, char *argv[]) {
     // CLI args
     char *name = argv[1];
     char *surname = argv[2];
-
+    
+    loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
+    for (int i =0;user_accounts[i][0]!= '\0'; i++) {
+        printf("\t%dAC:%s\n",i,user_accounts[i]); 
+    }
+    printf("MAN:%s",user_accounts[0]);
+    printf("MAN:%s",user_accounts[1]);
 
     int choice;
     do {
         // clear terminal
-        system("clear");
+// messaged out for debugging purposes
+//        system("clear");
+        printf("\nWelcome %s %s !\n", name, surname);
         printf("\nBank Management System Menu:\n");
         printf("1. Edit Account\n");
         printf("2. Delete Account\n");

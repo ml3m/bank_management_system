@@ -5,10 +5,13 @@
 
 void login(char *name, char *surname, Account *accounts, int numAccounts) {
     int i;
+    int user_accounts[5];
     for (i = 0; i< numAccounts; ++i){
         if (strcmp(name, accounts[i].owner.name) == 0 && 
             strcmp(surname, accounts[i].owner.surname) == 0){
             printf("Logged in as %s %s\n", name, surname);
+            
+
             return;
         }
     }
@@ -86,6 +89,13 @@ void deleteAccount(Account *accounts, int numAccounts) {
 
 void viewAccount(Account *accounts, int numAccounts) {
     // UI/UX work needed here... make it beautiful, add colors
+    //
+    char iban[MAX_IBAN_LENGTH];
+    printf("Enter the IBAN of account you want to see information: ");
+    scanf("%s", iban);
+
+    // #ToDo make it print information of account after the specific iban
+
     printf("Account Details:\n");
     printf("IBAN: %s\n", accounts[0].IBAN);
     printf("Owner: %s %s\n", accounts[0].owner.name, accounts[0].owner.surname);
@@ -141,12 +151,27 @@ int loadAccountsFromFile(Account *accounts) {
                 &accounts[numAccounts].coin, 
                 &accounts[numAccounts].amount) == 5
             ){
+        //debug
+        //printf("account names:%s",accounts[numAccounts].owner.name);
         numAccounts++;
     }
 
     fclose(file);
     printf("Accounts data loaded from file.\n");
     return numAccounts;
+}
+
+void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname) {
+    int k = 0;
+    for (int i = 0; i < numAccounts; i++) {
+        if (strcmp(accounts[i].owner.name, sysuser) == 0 && strcmp(accounts[i].owner.surname, syssurname) == 0) {
+            printf("account found: %s\n", accounts[i].IBAN);
+            strcpy(user_accounts[k], accounts[i].IBAN); 
+            printf("debug121: %s\n", user_accounts[k]);
+            k++;
+        }
+    }
+    user_accounts[k][0] = '\0'; 
 }
 
     // Sample implementation of performing transaction
