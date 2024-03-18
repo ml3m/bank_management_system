@@ -21,8 +21,7 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
 }
 
 
-/* works properly, coin change -> iban label change 
- * exchange rates not implemented yet*/
+/* works properly, coin change -> iban label change */
 void editAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to edit: ");
