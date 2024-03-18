@@ -13,7 +13,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // CLI args
     char *name = argv[1];
     char *surname = argv[2];
     
@@ -22,10 +21,7 @@ int main(int argc, char *argv[]) {
 
     int choice;
     do {
-        // messaged out for debugging purposes
         system("clear");
-
-        // CLI printing
         printUserAccounts(user_accounts);
         printMainMenu(name, surname);
 

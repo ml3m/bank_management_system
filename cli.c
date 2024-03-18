@@ -2,7 +2,6 @@
 #include "cli.h"
 #include <stdio.h>
 
-
 void printUserAccounts(char user_accounts[][9]){
     for (int i =0;user_accounts[i][0]!= '\0'; i++) {
         printf("\t%dAC:%s\n",i,user_accounts[i]); 

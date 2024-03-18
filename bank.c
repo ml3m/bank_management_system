@@ -12,8 +12,6 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
         if (strcmp(name, accounts[i].owner.name) == 0 && 
             strcmp(surname, accounts[i].owner.surname) == 0){
             printf("Logged in as %s %s\n", name, surname);
-            
-
             return;
         }
     }
@@ -23,7 +21,8 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
 }
 
 
-/* works properly, coin change -> iban label change */
+/* works properly, coin change -> iban label change 
+ * exchange rates not implemented yet*/
 void editAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to edit: ");
@@ -184,13 +183,10 @@ int loadAccountsFromFile(Account *accounts) {
                 &accounts[numAccounts].coin, 
                 &accounts[numAccounts].amount) == 5
             ){
-        //debug
-        //printf("account names:%s",accounts[numAccounts].owner.name);
         numAccounts++;
     }
 
     fclose(file);
-    printf("Accounts data loaded from file.\n");
     return numAccounts;
 }
 
@@ -222,7 +218,7 @@ void performTransaction(Account *accounts, int numAccounts) {
     scanf("%s", iban);
     printf("you entered iban: %s", iban);
 
-/*doesn't work porperly '*/
+        /*doesn't work porperly '*/
 
     if (amount <= accounts[0].amount) {
         accounts[0].amount -= amount;
