@@ -1,7 +1,6 @@
 #include "bank.h"
 #include "cli.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
 
@@ -19,9 +18,10 @@ int main(int argc, char *argv[]) {
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
+    printf("test101:%s",accounts[numAccounts-1].IBAN);
     int choice;
     do {
-        system("clear");
+//        system("clear");
         printUserAccounts(user_accounts);
         printMainMenu(name, surname);
 
@@ -29,21 +29,25 @@ int main(int argc, char *argv[]) {
         switch(choice) {
             case 1:
                 editAccount(accounts, numAccounts);
+                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 2:
                 deleteAccount(accounts, &numAccounts);
+                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 3:
                 viewAccount(accounts, numAccounts);
                 break;
             case 4:
                 performTransaction(accounts, numAccounts, name, surname);
+                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 5:
                 printf("Exiting...\n");
                 break;
             case 6:
                 createAccount(accounts, &numAccounts);
+                saveAccountsToFile(accounts, &numAccounts);
             default:
                 printf("Invalid choice! Please enter again.\n");
         }
@@ -53,6 +57,6 @@ int main(int argc, char *argv[]) {
 
     } while(choice != 5);
     
-    saveAccountsToFile(accounts, numAccounts);
+    saveAccountsToFile(accounts, &numAccounts);
     return 0;
 }

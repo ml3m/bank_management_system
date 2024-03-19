@@ -23,7 +23,7 @@ typedef struct {
 } Account;
 
 int loadAccountsFromFile(Account *accounts);
-void saveAccountsToFile(Account *accounts, int numAccounts);
+void saveAccountsToFile(Account *accounts, int *numAccounts);
 void login(char *name, char *surname, Account *accounts, int numAccounts);
 void editAccount(Account *accounts, int numAccounts);
 void deleteAccount(Account *accounts, int *numAccounts);

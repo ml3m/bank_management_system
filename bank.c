@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 /*works like a charm*/
 void login(char *name, char *surname, Account *accounts, int numAccounts) {
@@ -20,89 +21,105 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
     exit(1);
 }
 
-/*account Creation -> work in progress*/
-void createAccount(Account *accounts, int *numAccounts){
-    
-    printf("\nAccount Creation\n");
-    /*ask for data 
-     * numAccounts+
-     * save data to file maybe?
-     * restriction of <= 5 max accounts per accounts[i].owner.name/surname
-     * make sure the struct accounts[]. has more space -> segfag
-     */
-    printf("Enter the required data down bellow:\n");
-    printf("account name> "); 
+/* functions to be moved to generative_engine.c*/
+char* generateIBAN() {
+    srand(time(NULL));
+
     int r = rand() % 999999;
     r += 11000000;
-    printf("random gen number = %d\n",r);
 
-    char string_iban[9]; 
+    char* string_iban = (char*)malloc(10 * sizeof(char));
+    if (string_iban == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
     sprintf(string_iban, "%d", r);
     string_iban[0] = 'X';
     string_iban[1] = 'X';
 
-    printf("stringwithlabel: %s\n", string_iban);
-  
+    return string_iban;
+}
 
+int cmpIBANS(const char* iban1, const char* iban2) {
+    return strncmp(iban1 + 2, iban2, strlen(iban2));
+}
 
-            /*must be a function */
-// comparing ibans type XX123123 & 123123
-// makes sure there isn't  identical IBANs in the data base.
-    for (int i = 0; i< *numAccounts; i++) {
-        for (int j = 2; accounts[i].IBAN[j]; j++) {
-            if (string_iban[j] == accounts[i].IBAN[j]) {
-                printf("equal:%c",string_iban[j]);
-           }else {
-                printf("equal found... generate new random IBAN");
-                //end idk ..
-           } 
+int isUniqueIBAN(const char* newIBAN, Account* accounts, int numAccounts) {
+    for (int i = 0; i < numAccounts; ++i) {
+        if (cmpIBANS(accounts[i].IBAN, newIBAN) == 0) {
+            return 0; 
         }
+    }
+    return 1; 
+}
+
+char* generateUniqueIBAN(Account* accounts, int numAccounts) {
+    char* newIBAN;
+    do {
+        newIBAN = generateIBAN();
+    } while (!isUniqueIBAN(newIBAN, accounts, numAccounts));
+    return newIBAN;
+}
+
+void createAccount(Account *accounts, int *numAccounts){
     
-    }
+    char *name, *surname;
+    int chosen_coin;
+    char* uniqueIBAN = generateUniqueIBAN(accounts, *numAccounts);
+    //debug
+    printf("uniqueIBAN_generated: %s\n",uniqueIBAN);
 
-/*_____good_part_____*/
+    printf("\nAccount Creation\n");
+    printf("Enter the required data down bellow:\n");
+    printf("account name\n> "); 
+    scanf("%s",accounts[*numAccounts].owner.name);
+    printf("account surname\n> "); 
+    scanf("%s",accounts[*numAccounts].owner.surname);
 
-    for (int i = 0; i < *numAccounts; ++i) {
-        if (accounts->IBAN) {
-            //idk 
-            break;
-        } 
-    }
-
-    printf("Chose your Account Currency: ");
-
+    printf("Chose your Account Currency:\n");
     printf("1. RON\n");
     printf("2. EUR\n");
     printf("3. USD\n");
     printf("Enter your choice: ");
 
-    int chosen_coin;
     scanf("%d", &chosen_coin);
+    accounts[*numAccounts].coin = chosen_coin - 1;
+    accounts[*numAccounts].amount = 0.00;
+    
     switch (chosen_coin) {
         case 1: 
-            string_iban[0] = 'R';
-            string_iban[1] = 'O';
+            uniqueIBAN[0] = 'R';
+            uniqueIBAN[1] = 'O';
             break;
         case 2:
-            string_iban[0] = 'E';
-            string_iban[1] = 'U';
+            uniqueIBAN[0] = 'E';
+            uniqueIBAN[1] = 'U';
             break;
         case 3:
-            string_iban[0] = 'U';
-            string_iban[1] = 'S';
+            uniqueIBAN[0] = 'U';
+            uniqueIBAN[1] = 'S';
             break;
         default:
             printf("failed to change iban after coin conversion\n");
             break;
     } 
 
-
-
+    strcpy(accounts[*numAccounts].IBAN, uniqueIBAN);
+    printf("iban: %s",uniqueIBAN);
+    (*numAccounts)++;
+    printf("data entered:\n");
+    printf("name:%s\n",accounts[*numAccounts].owner.name);
+    printf("surname:%s\n",accounts[*numAccounts].owner.surname);
+    printf("coin:%d\n", accounts[*numAccounts].coin);
+    printf("ammount:%f\n", accounts[*numAccounts].amount);
+    free(uniqueIBAN);    
+    saveAccountsToFile(accounts, numAccounts);
 }
 
 
-
-/* works properly, coin change -> iban label change, currency conversion ignored for now */
+/* works properly, coin change -> iban label change, currency conversion ignored for now 
+ #ToDo : feature: modify ammount, replace IBAN(random generate verify existance)*/
 void editAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to edit: ");
@@ -135,7 +152,7 @@ void editAccount(Account *accounts, int numAccounts) {
                     printf("Enter your choice: ");
                     int changed_coin;
                     scanf("%d", &changed_coin);
-                    accounts[i].coin = changed_coin;
+                    accounts[i].coin = changed_coin - 1;
                     switch (changed_coin) {
                         case 1: 
                             accounts[i].IBAN[0]= 'R';
@@ -155,6 +172,29 @@ void editAccount(Account *accounts, int numAccounts) {
                     printf("iban changed to:%s\n",accounts[i].IBAN);
                     printf("Currency type updated successfully.\n");
                     break;
+                case 4:
+                    printf("Select balance option:\n");
+                    printf("1. Withdraw\n");
+                    printf("2. Deposit\n");
+                    int option;
+                    int option_ammount;
+                    scanf("%d", &option);
+                    switch (option) {
+                        case 1:
+                            printf("Withdrawal ammount: ");
+                            scanf("%d", &option_ammount);
+                            accounts[i].amount -= option_ammount;
+                            break;
+                        case 2:
+                            printf("Deposit ammount: ");
+                            scanf("%d", &option_ammount);
+                            accounts[i].amount += option_ammount;
+                            break;
+                        default:
+                            printf("Fail?");
+                            break;
+                    }
+
                 default:
                     printf("Invalid choice.\n");
             }
@@ -237,14 +277,14 @@ void viewAccount(Account *accounts, int numAccounts) {
 }
 
 /*works properly*/
-void saveAccountsToFile(Account *accounts, int numAccounts) {
+void saveAccountsToFile(Account *accounts, int *numAccounts) {
     FILE *file = fopen("accounts.txt", "w");
     if (file == NULL) {
         printf("Error opening file for writing.\n");
         return;
     }
 
-    for (int i = 0; i < numAccounts; ++i) {
+    for (int i = 0; i < *numAccounts; ++i) {
         fprintf(file, "%s %s %s %d %.2f\n", 
                 accounts[i].IBAN, 
                 accounts[i].owner.name, 

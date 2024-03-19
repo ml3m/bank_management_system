@@ -25,5 +25,6 @@ void printEditAccount(char *iban){
     printf("1. Change owner's name\n");
     printf("2. Change owner's surname\n");
     printf("3. Change currency type\n");
+    printf("4. Change currency ammount\n");
     printf("Enter your choice: ");
 }
