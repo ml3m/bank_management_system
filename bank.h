@@ -28,6 +28,6 @@ void login(char *name, char *surname, Account *accounts, int numAccounts);
 void editAccount(Account *accounts, int numAccounts);
 void deleteAccount(Account *accounts, int *numAccounts);
 void viewAccount(Account *accounts, int numAccounts);
-void performTransaction(Account *accounts, int numAccounts);
+void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname);
 void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname);
 #endif /* BANK_H */

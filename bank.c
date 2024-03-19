@@ -69,9 +69,9 @@ void editAccount(Account *accounts, int numAccounts) {
                             accounts[i].IBAN[1]= 'S';
                             break;
                         default:
-                            printf("failed to change iban after coin conversion");
+                            printf("failed to change iban after coin conversion\n");
                     } 
-                    printf("iban changed to:%s ",accounts[i].IBAN);
+                    printf("iban changed to:%s\n",accounts[i].IBAN);
                     printf("Currency type updated successfully.\n");
                     break;
                 default:
@@ -132,8 +132,7 @@ void viewAccount(Account *accounts, int numAccounts) {
 
     for (int i = 0; i< numAccounts; i++) {
         if(strcmp(accounts[i].IBAN,iban)== 0){
-           printf("check000"); 
-           printf("ac: %s", accounts[i].IBAN);
+           printf("AC: %s", accounts[i].IBAN);
 
            printf(">Account Details:\n");
            printf("IBAN: %s\n", accounts[i].IBAN);
@@ -205,7 +204,6 @@ void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accoun
         if (strcmp(accounts[i].owner.name, sysuser) == 0 && strcmp(accounts[i].owner.surname, syssurname) == 0) {
             printf("account found: %s\n", accounts[i].IBAN);
             strcpy(user_accounts[k], accounts[i].IBAN); 
-            printf("debug121: %s\n", user_accounts[k]);
             k++;
         }
     }
@@ -216,24 +214,41 @@ void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accoun
 /* for now we ignore the different currencies*/
 /* implementation needed, source account from connected user -> destination account*/
 
-void performTransaction(Account *accounts, int numAccounts) {
-    // For simplicity, assume a transfer between the first two accounts
+void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname) {
     printf("Performing transaction...\n");
-    double amount;
-    char iban[MAX_IBAN_LENGTH]; 
+    float amount;
+    char dest_iban[MAX_IBAN_LENGTH]; 
+    char source_iban[MAX_IBAN_LENGTH]; 
+
+    printf("Enter source account IBAN: ");
+    scanf("%s", source_iban);
     printf("Enter amount to transfer: ");
-    scanf("%lf", &amount);
-    printf("Enter destination IBAN...");
-    scanf("%s", iban);
-    printf("you entered iban: %s", iban);
-
-        /*doesn't work porperly '*/
-
-    if (amount <= accounts[0].amount) {
-        accounts[0].amount -= amount;
-        accounts[1].amount += amount;
-        printf("Transaction successful.\n");
-    } else {
-        printf("Insufficient funds.\n");
+    scanf("%f", &amount);
+    printf("Enter destination IBAN: ");
+    scanf("%s", dest_iban);
+    printf("you entered iban: %s\n", dest_iban);
+    
+    for (int i = 0; i< numAccounts; i++) {
+        if (strcmp(accounts[i].IBAN, source_iban) == 0 && 
+            strcmp(accounts[i].owner.name, sysuser) == 0 &&
+            strcmp(accounts[i].owner.surname, syssurname) == 0){
+               // printf("%s %s %s",accounts[i].IBAN, accounts[i].owner.name, accounts[i].owner.surname); 
+               if (accounts[i].amount >= amount) {
+                  // performTransaction 
+                    for (int j = 0; i< numAccounts; j++) {
+                        if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+                            accounts[i].amount -= amount;
+                            accounts[j].amount += amount;
+                            break;
+                        }else {
+                            printf("Destination IBAN Doesn't exist...\n");
+                            break;
+                        }
+                    }
+               }else{
+                   printf("Insuficient Funds...\n");
+                   break;
+               }
+        } 
     }
 }

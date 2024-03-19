@@ -37,11 +37,13 @@ int main(int argc, char *argv[]) {
                 viewAccount(accounts, numAccounts);
                 break;
             case 4:
-                performTransaction(accounts, numAccounts);
+                performTransaction(accounts, numAccounts, name, surname);
                 break;
             case 5:
                 printf("Exiting...\n");
                 break;
+            case 6:
+                //createaAccount();
             default:
                 printf("Invalid choice! Please enter again.\n");
         }
