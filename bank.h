@@ -1,3 +1,11 @@
+/*
+================================================================================
+File: bank.h
+Author: mlem 
+Description: bank header, where the main structs are bedded. 
+GitHub: https://https://github.com/ml3m
+================================================================================
+*/
 #ifndef BANK_H 
 #define BANK_H
 
@@ -32,5 +40,4 @@ void performTransaction(Account *accounts, int numAccounts, char *sysuser, char 
 void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname);
 void createAccount(Account *accounts, int *numAccounts);
 
-#endif /* BANK_H */
-
+#endif 

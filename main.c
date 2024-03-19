@@ -1,6 +1,19 @@
+/*            _______           ____              _    
+ _ __ ___    / /___ / _ __ ___ | __ )  __ _ _ __ | | __
+| '_ ` _ \  / /  |_ \| '_ ` _ \|  _ \ / _` | '_ \| |/ /
+| | | | | |/ /  ___) | | | | | | |_) | (_| | | | |   < 
+|_| |_| |_/_/  |____/|_| |_| |_|____/ \__,_|_| |_|_|\_\
+================================================================================
+File: main.c
+Author: mlem 
+Description: main function :) 
+GitHub: https://https://github.com/ml3m
+================================================================================
+*/
 #include "bank.h"
 #include "cli.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
 
@@ -18,12 +31,13 @@ int main(int argc, char *argv[]) {
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
-    printf("test101:%s",accounts[numAccounts-1].IBAN);
     int choice;
     do {
-//        system("clear");
+        system("clear");
+        printHeader();
+        sayHello(name, surname);
         printUserAccounts(user_accounts);
-        printMainMenu(name, surname);
+        printMainMenu();
 
         scanf("%d", &choice);
         switch(choice) {
@@ -49,7 +63,7 @@ int main(int argc, char *argv[]) {
                 createAccount(accounts, &numAccounts);
                 saveAccountsToFile(accounts, &numAccounts);
             default:
-                printf("Invalid choice! Please enter again.\n");
+                printFAIL(1);
         }
         printf("Press Enter to continue...");
         getchar();
