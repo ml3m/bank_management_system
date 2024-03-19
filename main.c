@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
                 printf("Exiting...\n");
                 break;
             case 6:
-                //createaAccount();
+                createAccount(accounts, &numAccounts);
             default:
                 printf("Invalid choice! Please enter again.\n");
         }

@@ -21,14 +21,83 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
 }
 
 /*account Creation -> work in progress*/
-void createAccount(){
-    return;
+void createAccount(Account *accounts, int *numAccounts){
+    
     printf("\nAccount Creation\n");
     /*ask for data 
-     * numAccounts++
+     * numAccounts+
      * save data to file maybe?
      * restriction of <= 5 max accounts per accounts[i].owner.name/surname
+     * make sure the struct accounts[]. has more space -> segfag
      */
+    printf("Enter the required data down bellow:\n");
+    printf("account name> "); 
+    int r = rand() % 999999;
+    r += 11000000;
+    printf("random gen number = %d\n",r);
+
+    char string_iban[9]; 
+    sprintf(string_iban, "%d", r);
+    string_iban[0] = 'X';
+    string_iban[1] = 'X';
+
+    printf("stringwithlabel: %s\n", string_iban);
+  
+
+
+            /*must be a function */
+// comparing ibans type XX123123 & 123123
+// makes sure there isn't  identical IBANs in the data base.
+    for (int i = 0; i< *numAccounts; i++) {
+        for (int j = 2; accounts[i].IBAN[j]; j++) {
+            if (string_iban[j] == accounts[i].IBAN[j]) {
+                printf("equal:%c",string_iban[j]);
+           }else {
+                printf("equal found... generate new random IBAN");
+                //end idk ..
+           } 
+        }
+    
+    }
+
+/*_____good_part_____*/
+
+    for (int i = 0; i < *numAccounts; ++i) {
+        if (accounts->IBAN) {
+            //idk 
+            break;
+        } 
+    }
+
+    printf("Chose your Account Currency: ");
+
+    printf("1. RON\n");
+    printf("2. EUR\n");
+    printf("3. USD\n");
+    printf("Enter your choice: ");
+
+    int chosen_coin;
+    scanf("%d", &chosen_coin);
+    switch (chosen_coin) {
+        case 1: 
+            string_iban[0] = 'R';
+            string_iban[1] = 'O';
+            break;
+        case 2:
+            string_iban[0] = 'E';
+            string_iban[1] = 'U';
+            break;
+        case 3:
+            string_iban[0] = 'U';
+            string_iban[1] = 'S';
+            break;
+        default:
+            printf("failed to change iban after coin conversion\n");
+            break;
+    } 
+
+
+
 }
 
 
@@ -216,14 +285,16 @@ int loadAccountsFromFile(Account *accounts) {
 void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname) {
     int k = 0;
     for (int i = 0; i < numAccounts; i++) {
-        if (strcmp(accounts[i].owner.name, sysuser) == 0 && strcmp(accounts[i].owner.surname, syssurname) == 0) {
-            printf("account found: %s\n", accounts[i].IBAN);
-            strcpy(user_accounts[k], accounts[i].IBAN); 
-            k++;
+        if (strcmp(accounts[i].owner.name, sysuser) == 0 && 
+            strcmp(accounts[i].owner.surname, syssurname) == 0) {
+                printf("account found: %s\n", accounts[i].IBAN);
+                strcpy(user_accounts[k], accounts[i].IBAN); 
+                k++;
         }
     }
     user_accounts[k][0] = '\0'; 
 }
+
 
 /*works properly, currency conversion wansn't implemented yet*/
 void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname) {
@@ -231,6 +302,7 @@ void performTransaction(Account *accounts, int numAccounts, char *sysuser, char 
     float amount;
     char dest_iban[MAX_IBAN_LENGTH]; 
     char source_iban[MAX_IBAN_LENGTH]; 
+    int successfully = 0;
 
     printf("Enter source account IBAN: ");
     scanf("%s", source_iban);
@@ -241,18 +313,22 @@ void performTransaction(Account *accounts, int numAccounts, char *sysuser, char 
     printf("you entered iban: %s\n", dest_iban);
     
     for (int i = 0; i< numAccounts; i++) {
+        if (successfully) {
+            break;
+        }
         if (strcmp(accounts[i].IBAN, source_iban) == 0 && 
             strcmp(accounts[i].owner.name, sysuser) == 0 &&
             strcmp(accounts[i].owner.surname, syssurname) == 0){
 
                if (accounts[i].amount >= amount) {
-                    for (int j = 0; i< numAccounts; j++) {
+                    for (int j = 0; j< numAccounts; j++) {
+                        printf("dubug111");
+                        printf("accounts[%d]=%s\n",i,accounts[j].IBAN);
+                        printf("dest_iban=%s",dest_iban);
                         if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+                            successfully = 1;
                             accounts[i].amount -= amount;
                             accounts[j].amount += amount;
-                            break;
-                        }else {
-                            printf("Destination IBAN Doesn't exist...\n");
                             break;
                         }
                     }
@@ -261,5 +337,10 @@ void performTransaction(Account *accounts, int numAccounts, char *sysuser, char 
                    break;
                }
         } 
+    }
+    if (successfully) {
+        printf("Transaction Successfully Processed!\n");
+    }else {
+        printf("Destination IBAN doesn't exit!\n");
     }
 }
