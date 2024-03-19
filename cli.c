@@ -12,16 +12,17 @@ GitHub: https://https://github.com/ml3m
 void printUserAccounts(char user_accounts[][9]){
     printf(ANSI_BOLD_START "Owned Accounts:\n\n" ANSI_COLOR_RESET);
     for (int i =0;user_accounts[i][0]!= '\0'; i++) {
-        printf(ANSI_UNDERLINE_START"\t%dAC:%s\n"ANSI_COLOR_RESET, i,user_accounts[i]); 
+        printf("\t%dAC:", i); 
+        printf(ANSI_UNDERLINE_START"%s\n"ANSI_COLOR_RESET, user_accounts[i]); 
     }
 }
 
 void printHeader() {
-    printf(ANSI_BOLD_START ANSI_COLOR_BLUE "*********************************************\n");
-    printf("*          "ANSI_COLOR_RESET);
+    printf(ANSI_BOLD_START ANSI_COLOR_BLUE "\t*********************************************\n");
+    printf("\t*          "ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA ANSI_BOLD_START "MlemBank - Banking App"ANSI_COLOR_RESET);
     printf(ANSI_BOLD_START ANSI_COLOR_BLUE "           *\n");
-    printf("*********************************************\n" ANSI_COLOR_RESET);
+    printf("\t*********************************************\n" ANSI_COLOR_RESET);
 }
 
 void sayHello(char *name, char *surname){

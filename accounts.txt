@@ -1,9 +1,9 @@
-EU111111 Jonny Doe 1 400.00
+EU111111 Jonny Man 1 1850.00
 US789012 Alice Smith 2 2200.00
 EU345678 Bob Johnson 1 700.00
-RO110123 John Doe 0 0.00
-RO633085 John Doe 0 0.00
-EU278244 John Doe 1 100.00
+RO110123 Alice Smith 0 1240.32
+RO633085 Alice Smith 0 2571.00
+EU278244 Florin Piersic 1 100.00
 EU143989 Mlem Andrei 1 0.00
-EU636599 Loredana Baumgartner 1 0.00
+EU636599 Maria Popa 1 0.00
 US123111 Frincu Andrei 2 12.00
