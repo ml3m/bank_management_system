@@ -16,6 +16,7 @@ void printMainMenu(char *name, char *surname){
     printf("3. View Account\n");
     printf("4. Perform Transaction\n");
     printf("5. Exit\n");
+    printf("6. Create Account\n");
     printf("Enter your choice: ");
 }
 

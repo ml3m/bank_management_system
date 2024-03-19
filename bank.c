@@ -20,8 +20,20 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
     exit(1);
 }
 
+/*account Creation -> work in progress*/
+void createAccount(){
+    return;
+    printf("\nAccount Creation\n");
+    /*ask for data 
+     * numAccounts++
+     * save data to file maybe?
+     * restriction of <= 5 max accounts per accounts[i].owner.name/surname
+     */
+}
 
-/* works properly, coin change -> iban label change */
+
+
+/* works properly, coin change -> iban label change, currency conversion ignored for now */
 void editAccount(Account *accounts, int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to edit: ");
@@ -155,6 +167,7 @@ void viewAccount(Account *accounts, int numAccounts) {
     }
 }
 
+/*works properly*/
 void saveAccountsToFile(Account *accounts, int numAccounts) {
     FILE *file = fopen("accounts.txt", "w");
     if (file == NULL) {
@@ -176,6 +189,7 @@ void saveAccountsToFile(Account *accounts, int numAccounts) {
     printf("Accounts data saved to file.\n");
 }
 
+/*works properly*/
 int loadAccountsFromFile(Account *accounts) {
     FILE *file = fopen("accounts.txt", "r");
     if (file == NULL) {
@@ -198,6 +212,7 @@ int loadAccountsFromFile(Account *accounts) {
     return numAccounts;
 }
 
+/*works properly*/
 void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname) {
     int k = 0;
     for (int i = 0; i < numAccounts; i++) {
@@ -210,10 +225,7 @@ void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accoun
     user_accounts[k][0] = '\0'; 
 }
 
-/* doesn't work properly it sends the money to the next account'*/
-/* for now we ignore the different currencies*/
-/* implementation needed, source account from connected user -> destination account*/
-
+/*works properly, currency conversion wansn't implemented yet*/
 void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname) {
     printf("Performing transaction...\n");
     float amount;
@@ -232,9 +244,8 @@ void performTransaction(Account *accounts, int numAccounts, char *sysuser, char 
         if (strcmp(accounts[i].IBAN, source_iban) == 0 && 
             strcmp(accounts[i].owner.name, sysuser) == 0 &&
             strcmp(accounts[i].owner.surname, syssurname) == 0){
-               // printf("%s %s %s",accounts[i].IBAN, accounts[i].owner.name, accounts[i].owner.surname); 
+
                if (accounts[i].amount >= amount) {
-                  // performTransaction 
                     for (int j = 0; i< numAccounts; j++) {
                         if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
                             accounts[i].amount -= amount;
