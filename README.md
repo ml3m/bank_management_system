@@ -8,4 +8,4 @@ using the following command:
 
 ./main [NAME] [SURNAME]
 
-
+<p align="center"><img src="./assets/ss0.png" /></a></p>
