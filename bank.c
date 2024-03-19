@@ -83,28 +83,38 @@ void editAccount(Account *accounts, int numAccounts) {
     printf("Account not found with the given IBAN.\n");
 }
 
-
-/*work in progress delete account doesn't work properly'*/
-/*need to come up with a implementation for deleting an account*/
-/*need to make sure the user doesn't have any money in the account'*/
-/*prompt the user to transfer the money left and only then the account is available to be deleted*/
-void deleteAccount(Account *accounts, int numAccounts) {
+/*works properly, the enter key confirmation doesn't
+ * more testing required*/
+void deleteAccount(Account *accounts, int *numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of the account you want to delete: ");
     scanf("%s", iban);
 
     int i;
-    for (i = 0; i < numAccounts; ++i) {
+    for (i = 0; i < *numAccounts; ++i) {
         if (strcmp(iban, accounts[i].IBAN) == 0) {
-            printf("Account found. Deleting account: %s\n", iban);
-            // Shift elements to overwrite the deleted account
-            // work needed here...
-            for (int j = i; j < numAccounts - 1; ++j) {
-                accounts[j] = accounts[j + 1];
+            printf("Account %s found!\n", iban);
+            if (accounts[i].amount != 0) {
+                printf("ERROR: account has funds, remove funds and try again!\n");
+                return;
+            } else {
+                char response;
+                printf("Are you sure you want to delete account %s ? (y/n): ", iban);
+                scanf(" %c", &response); 
+
+                if (response == 'y' || response == 'Y' || response == '\n') {
+                    printf("Deleting account...\n");
+                    for (int j = i; j < *numAccounts - 1; ++j) {
+                        accounts[j] = accounts[j + 1];
+                    }
+                    (*numAccounts)--;
+                    printf("Account deleted successfully.\n");
+                    return;
+                } else {
+                    printf("Account deletion canceled!\n");
+                    return;
+                }
             }
-            numAccounts--;
-            printf("Account deleted successfully.\n");
-            return;
         }
     }
     printf("Account not found with the given IBAN.\n");

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
                 editAccount(accounts, numAccounts);
                 break;
             case 2:
-                deleteAccount(accounts, numAccounts);
+                deleteAccount(accounts, &numAccounts);
                 break;
             case 3:
                 viewAccount(accounts, numAccounts);
