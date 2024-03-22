@@ -19,6 +19,7 @@ int main(){
     printf("\x1b[1mBold text\x1b[0m\n");
     // dim looks good
     printf("\x1b[2mDim text\x1b[0m\n");
+    // italic also 
     printf("\x1b[3mItalic text\x1b[0m\n");
     printf("\x1b[4mUnderlined text\x1b[0m\n");
     printf("\x1b[5mBlinking text\x1b[0m\n");

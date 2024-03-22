@@ -19,16 +19,17 @@ GitHub: https://https://github.com/ml3m
 #define ANSI_COLOR_BLACK   "\x1b[30m"
 
 #define ANSI_UNDERLINE_START "\x1b[4m"
+#define ANSI_ITALIC_START "\x1b[3m"  
 #define ANSI_BOLD_START "\x1b[1m"
 
 #define GREEN_BACKGROUND "\x1b[42m"
 #define RED_BACKGROUND "\x1b[41m"
 
-void printFAIL(int choice);
-void printPASS(int choice);
 void printUserAccounts(char user_accounts[][9]);
 void printEditAccount(char *iban);
 void sayHello(char *name, char *surname);
+void printFAIL(int choice);
+void printPASS(int choice);
 void printHeader();
 void printMainMenu();
 void editHeader();

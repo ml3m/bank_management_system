@@ -110,6 +110,9 @@ void editAccount(Account *accounts, int numAccounts) {
                     int changed_coin;
                     scanf("%d", &changed_coin);
                     accounts[i].coin = changed_coin - 1;
+                    //switch need verification
+                    //
+                    // works properly
                     switch (changed_coin) {
                         case 1: 
                             accounts[i].IBAN[0]= 'R';
@@ -140,17 +143,20 @@ void editAccount(Account *accounts, int numAccounts) {
                             printf("Withdrawal ammount: ");
                             scanf("%d", &option_ammount);
                             accounts[i].amount -= option_ammount;
+                            printPASS(1);
                             break;
                         case 2:
                             printf("Deposit ammount: ");
                             scanf("%d", &option_ammount);
                             accounts[i].amount += option_ammount;
+                            printPASS(1);
                             break;
                         default:
                             //more handling here
                             printf("Fail?");
                             break;
                     }
+                    break;
                 default:
                     printFAIL(1);
             }

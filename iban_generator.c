@@ -17,7 +17,6 @@ GitHub: https://https://github.com/ml3m
 char* generateIBAN() {
     srand(time(NULL)); // this line is cool
 
-
     int r = rand() % 999999;
     r += 11000000;
 
