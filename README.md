@@ -2,7 +2,7 @@
 
 work in progress
 
-## execute (Makefile):
+## run like this:
 
 using the following command:
 ##
