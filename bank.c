@@ -157,10 +157,10 @@ void editAccount(Account *accounts, int numAccounts) {
                             break;
                     }
                 case 5:
-                    printf("old: %s\n", accounts[i].IBAN);
+                    printf("Old IBAN: %s\n", accounts[i].IBAN);
                     char *newuniqueIBAN = generateUniqueIBAN(accounts, numAccounts);
-                    printf("iban generating...\n");
-                    printf("generated: %s\n", newuniqueIBAN);
+                    printf("New IBAN generating...\n");
+                    printf("generated IBAN: %s\n", newuniqueIBAN);
                     strcpy(accounts[i].IBAN, newuniqueIBAN);
                     if (accounts[i].coin == 0) {
                         accounts[i].IBAN[0]= 'R';
@@ -174,7 +174,7 @@ void editAccount(Account *accounts, int numAccounts) {
                         accounts[i].IBAN[0]= 'U';
                         accounts[i].IBAN[1]= 'S';
                     }
-                    printf("new: %s\n", accounts[i].IBAN);
+                    printf("New IBAN: %s\n", accounts[i].IBAN);
                     break;
                 
                 default:
