@@ -2,9 +2,12 @@
 
 work in progress
 
-## execute (Makefile):
+## run like this:
 
 using the following command:
+##
+    ./main [NAME] [SURNAME]
 
-./main [NAME] [SURNAME]
 
+<p align="center"><img src="./assets/1.png" /></a></p>
+<p align="center"><img src="./assets/2.png" /></a></p>
