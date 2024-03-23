@@ -156,7 +156,27 @@ void editAccount(Account *accounts, int numAccounts) {
                             printf("Fail?");
                             break;
                     }
+                case 5:
+                    printf("old: %s\n", accounts[i].IBAN);
+                    char *newuniqueIBAN = generateUniqueIBAN(accounts, numAccounts);
+                    printf("iban generating...\n");
+                    printf("generated: %s\n", newuniqueIBAN);
+                    strcpy(accounts[i].IBAN, newuniqueIBAN);
+                    if (accounts[i].coin == 0) {
+                        accounts[i].IBAN[0]= 'R';
+                        accounts[i].IBAN[1]= 'O';
+                    }
+                    if (accounts[i].coin == 1) {
+                        accounts[i].IBAN[0]= 'E';
+                        accounts[i].IBAN[1]= 'U';
+                    }
+                    if (accounts[i].coin == 2) {
+                        accounts[i].IBAN[0]= 'U';
+                        accounts[i].IBAN[1]= 'S';
+                    }
+                    printf("new: %s\n", accounts[i].IBAN);
                     break;
+                
                 default:
                     printFAIL(1);
             }
