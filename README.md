@@ -5,7 +5,6 @@
 
 
 ## run, using the following command:
-##
     ./main [NAME] [SURNAME]
 
 
