@@ -96,6 +96,10 @@ void printFAIL(const int choice){
         case 10:
             printf(ANSI_COLOR_BLACK RED_BACKGROUND "Memory allocation failed.\n" ANSI_COLOR_RESET);
             break;
+        case 11:
+            printf(ANSI_COLOR_BLACK RED_BACKGROUND "Entered IBAN doesn't exit for this account...\n" ANSI_COLOR_RESET);
+            break;
+
     }
 }
 

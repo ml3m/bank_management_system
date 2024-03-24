@@ -14,20 +14,36 @@ GitHub: https://https://github.com/ml3m
 #include "cli.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+/*create account flag implementaiton*/
 int main(int argc, char *argv[]) {
+    
+    if (argc == 1 || argc >3){
+        printf("Usage1: %s [NAME] [SURNAME]\n", argv[0]);
+        printf("Usage2: %s -create/-c [NAME] [SURNAME]\n", argv[0]);
+        return 1;
+    } 
 
-    char user_accounts[5][9];
+    char user_accounts[MAX_USER_ACCOUNTS][MAX_IBAN_LENGTH];
     Account accounts[MAX_ACCOUNTS];
     int numAccounts = loadAccountsFromFile(accounts); 
-    if (argc != 3) {
-        printf("Usage: %s [NAME] [SURNAME]\n", argv[0]);
+
+    char *create_flag = argv[1];
+    if ((strcmp(create_flag, "-c")== 0 || strcmp(create_flag, "-create")==0)&& argc == 2) {
+        createAccount(accounts, &numAccounts);
+        printf("login in.. with created account...");
+        
         return 1;
+        //login with last account created in accounts.txt 
     }
+
+    // logic between noromal mode and -c
+    // wanted behaviour: create account and log in imediately(make prompted, asked), 
+    // accounts loaded for that person(the one created) -> function should work normal, saving also.
 
     char *name = argv[1];
     char *surname = argv[2];
-    
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 

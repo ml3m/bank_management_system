@@ -225,12 +225,13 @@ void viewAccount(const Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of account you want to see information: ");
     scanf("%s", iban);
+    int found = 0;
 
 
     for (int i = 0; i< numAccounts; i++) {
         if(strcmp(accounts[i].IBAN,iban)== 0){
+           found = 1; 
            printf("AC: %s", accounts[i].IBAN);
-
            printf(">Account Details:\n");
            printf("IBAN: %s\n", accounts[i].IBAN);
            printf("Owner: %s %s\n", accounts[i].owner.name, accounts[i].owner.surname);
@@ -250,6 +251,7 @@ void viewAccount(const Account *accounts, const int numAccounts) {
            }
         }
     }
+    if(!found)printFAIL(11);
 }
 
 void saveAccountsToFile(const Account *accounts, const int *numAccounts) {
