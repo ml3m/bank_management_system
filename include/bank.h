@@ -16,7 +16,7 @@ GitHub: https://https://github.com/ml3m
 #define MAX_USER_ACCOUNTS 5
 #define MAX_NAME_LENGTH 50
 #define MAX_ACCOUNTS 100
-#define MAX_IBAN_LENGTH 20
+#define MAX_IBAN_LENGTH 9
 
 typedef struct {
     char name[MAX_NAME_LENGTH];
@@ -37,7 +37,7 @@ void deleteAccount(Account *accounts, int *numAccounts);
 void viewAccount(const Account *accounts, const int numAccounts);
 void saveAccountsToFile(const Account *accounts, const int *numAccounts);
 int loadAccountsFromFile(Account *accounts);
-void loadUserAccounts(char user_accounts[][9], const int numAccounts, const Account *accounts, const char *sysuser, const char *syssurname);
+void loadUserAccounts(char user_accounts[][MAX_IBAN_LENGTH], const int numAccounts, const Account *accounts, const char *sysuser, const char *syssurname);
 void performTransaction(Account *accounts, const int numAccounts, const char *sysuser, const char *syssurname);
 
 #endif 
