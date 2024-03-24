@@ -1,5 +1,5 @@
 /*
-================================================================================
+, ================================================================================
 File: cli.c
 Author: mlem 
 Description: this file provides the required cli printing.
@@ -9,7 +9,7 @@ GitHub: https://https://github.com/ml3m
 #include "cli.h"
 #include <stdio.h>
 
-void printUserAccounts(char user_accounts[][9]){
+void printUserAccounts(const char user_accounts[][9]){
     printf(ANSI_BOLD_START "Owned Accounts:\n\n" ANSI_COLOR_RESET);
     for (int i =0;user_accounts[i][0]!= '\0'; i++) {
         printf("\t%dAC:", i); 
@@ -28,7 +28,7 @@ void printHeader() {
     //printf("\t*********************************************\n" ANSI_COLOR_RESET);
 }
 
-void sayHello(char *name, char *surname){
+void sayHello(const char *name, const char *surname){
     printf(ANSI_COLOR_MAGENTA"\nWelcome "ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA ANSI_BOLD_START"%s %s !\n"ANSI_COLOR_RESET, name, surname);
 }
@@ -43,7 +43,7 @@ void printMainMenu(){
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 
-void printEditAccount(char *iban){
+void printEditAccount(const char *iban){
     printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "Account found "ANSI_COLOR_RESET);
     printf("Editing account: ");
     printf(ANSI_BOLD_START "%s\n", iban);
@@ -61,7 +61,7 @@ void editHeader(){
     printf("of the account you want to edit: ");
 }
 
-void printFAIL(int choice){
+void printFAIL(const int choice){
     switch (choice) {
         case 0:
             printf(ANSI_COLOR_BLACK RED_BACKGROUND "Failed to change iban after coin conversion\n"ANSI_COLOR_RESET);
@@ -99,7 +99,7 @@ void printFAIL(int choice){
     }
 }
 
-void printPASS(int choice){
+void printPASS(const int choice){
     switch (choice) {
         case 0:
             printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "Currency type updated successfully!\n"ANSI_COLOR_RESET);

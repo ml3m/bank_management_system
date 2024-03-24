@@ -15,7 +15,7 @@ GitHub: https://https://github.com/ml3m
 #include "iban_generator.h"
 
 /*works like a charm*/
-void login(char *name, char *surname, Account *accounts, int numAccounts) {
+void login(const char *name, const char *surname, const Account *accounts, const int numAccounts) {
     for (int i = 0; i< numAccounts; ++i){
         if (strcmp(name, accounts[i].owner.name) == 0 && 
             strcmp(surname, accounts[i].owner.surname) == 0){
@@ -72,13 +72,13 @@ void createAccount(Account *accounts, int *numAccounts){
     printf("coin:%d\n", accounts[*numAccounts].coin);
     printf("ammount:%f\n", accounts[*numAccounts].amount);
     free(uniqueIBAN);    
+
+    //we dont't need this technically
     saveAccountsToFile(accounts, numAccounts);
 }
 
-
-/* works properly, currency exchange ignored for now 
- #ToDo "renew"replace IBAN(random generate verify existance)*/
-void editAccount(Account *accounts, int numAccounts) {
+/* works properly, currency exchange ignored for now */ 
+void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
 
     editHeader();
@@ -219,7 +219,7 @@ void deleteAccount(Account *accounts, int *numAccounts) {
     printFAIL(2);
 }
 
-void viewAccount(Account *accounts, int numAccounts) {
+void viewAccount(const Account *accounts, const int numAccounts) {
     // UI/UX work needed here... make it beautiful, add colors
 
     char iban[MAX_IBAN_LENGTH];
@@ -252,7 +252,7 @@ void viewAccount(Account *accounts, int numAccounts) {
     }
 }
 
-void saveAccountsToFile(Account *accounts, int *numAccounts) {
+void saveAccountsToFile(const Account *accounts, const int *numAccounts) {
     FILE *file = fopen("accounts.txt", "w");
     if (file == NULL) {
         printFAIL(6); 
@@ -294,7 +294,11 @@ int loadAccountsFromFile(Account *accounts) {
     return numAccounts;
 }
 
-void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname) {
+void loadUserAccounts(char user_accounts[][9], 
+                      const int numAccounts, 
+                      const Account *accounts, 
+                      const char *sysuser, 
+                      const char *syssurname) {
     int k = 0;
     for (int i = 0; i < numAccounts; i++) {
         if (strcmp(accounts[i].owner.name, sysuser) == 0 && 
@@ -309,8 +313,7 @@ void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accoun
 
 
 /*works properly, currency conversion wansn't implemented yet*/
-void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname) {
-    // printf("Performing transaction...\n");
+void performTransaction(Account *accounts, const int numAccounts, const char *sysuser, const char *syssurname) {
     float amount;
     char dest_iban[MAX_IBAN_LENGTH]; 
     char source_iban[MAX_IBAN_LENGTH]; 

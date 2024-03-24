@@ -37,7 +37,7 @@ int cmpIBANS(const char* iban1, const char* iban2) {
     return strncmp(iban1 + 2, iban2, strlen(iban2));
 }
 
-int isUniqueIBAN(const char* newIBAN, Account* accounts, int numAccounts) {
+int isUniqueIBAN(const char* newIBAN, const Account* accounts, const int numAccounts) {
     for (int i = 0; i < numAccounts; ++i) {
         if (cmpIBANS(accounts[i].IBAN, newIBAN) == 0) {
             return 0; 
@@ -46,7 +46,7 @@ int isUniqueIBAN(const char* newIBAN, Account* accounts, int numAccounts) {
     return 1; 
 }
 
-char* generateUniqueIBAN(Account* accounts, int numAccounts) {
+char* generateUniqueIBAN(const Account* accounts, const int numAccounts) {
     char* newIBAN;
     do {
         newIBAN = generateIBAN();

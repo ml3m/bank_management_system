@@ -25,11 +25,11 @@ GitHub: https://https://github.com/ml3m
 #define GREEN_BACKGROUND "\x1b[42m"
 #define RED_BACKGROUND "\x1b[41m"
 
-void printUserAccounts(char user_accounts[][9]);
-void printEditAccount(char *iban);
-void sayHello(char *name, char *surname);
-void printFAIL(int choice);
-void printPASS(int choice);
+void printUserAccounts(const char user_accounts[][9]);
+void printEditAccount(const char *iban);
+void sayHello(const char *name, const char *surname);
+void printFAIL(const int choice);
+void printPASS(const int choice);
 void printHeader();
 void printMainMenu();
 void editHeader();

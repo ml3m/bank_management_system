@@ -30,14 +30,14 @@ typedef struct {
     double amount;
 } Account;
 
-int loadAccountsFromFile(Account *accounts);
-void saveAccountsToFile(Account *accounts, int *numAccounts);
-void login(char *name, char *surname, Account *accounts, int numAccounts);
-void editAccount(Account *accounts, int numAccounts);
-void deleteAccount(Account *accounts, int *numAccounts);
-void viewAccount(Account *accounts, int numAccounts);
-void performTransaction(Account *accounts, int numAccounts, char *sysuser, char *syssurname);
-void loadUserAccounts(char  user_accounts[][9], int numAccounts, Account *accounts, char *sysuser, char *syssurname);
+void login(const char *name, const char *surname,const Account *accounts, const int numAccounts);
 void createAccount(Account *accounts, int *numAccounts);
+void editAccount(Account *accounts, const int numAccounts);
+void deleteAccount(Account *accounts, int *numAccounts);
+void viewAccount(const Account *accounts, const int numAccounts);
+void saveAccountsToFile(const Account *accounts, const int *numAccounts);
+int loadAccountsFromFile(Account *accounts);
+void loadUserAccounts(char user_accounts[][9], const int numAccounts, const Account *accounts, const char *sysuser, const char *syssurname);
+void performTransaction(Account *accounts, const int numAccounts, const char *sysuser, const char *syssurname);
 
 #endif 

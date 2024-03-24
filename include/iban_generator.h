@@ -11,7 +11,7 @@ GitHub: https://https://github.com/ml3m
 
 char* generateIBAN();
 int cmpIBANS(const char* iban1, const char* iban2);
-int isUniqueIBAN(const char* newIBAN, Account* accounts, int numAccounts);
-char* generateUniqueIBAN(Account* accounts, int numAccounts);
+int isUniqueIBAN(const char* newIBAN, const Account* accounts, const int numAccounts);
+char* generateUniqueIBAN(const Account* accounts, const int numAccounts);
 
 #endif 
