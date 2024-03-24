@@ -16,9 +16,7 @@ GitHub: https://https://github.com/ml3m
 
 /*works like a charm*/
 void login(char *name, char *surname, Account *accounts, int numAccounts) {
-    int i;
-    int user_accounts[5];
-    for (i = 0; i< numAccounts; ++i){
+    for (int i = 0; i< numAccounts; ++i){
         if (strcmp(name, accounts[i].owner.name) == 0 && 
             strcmp(surname, accounts[i].owner.surname) == 0){
             printf("Logged in as %s %s\n", name, surname);
@@ -31,7 +29,6 @@ void login(char *name, char *surname, Account *accounts, int numAccounts) {
 
 void createAccount(Account *accounts, int *numAccounts){
     
-    char *name, *surname;
     int chosen_coin;
     char* uniqueIBAN = generateUniqueIBAN(accounts, *numAccounts);
 

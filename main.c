@@ -43,34 +43,34 @@ int main(int argc, char *argv[]) {
         switch(choice) {
             case 1:
                 editAccount(accounts, numAccounts);
-                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 2:
                 deleteAccount(accounts, &numAccounts);
-                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 3:
                 viewAccount(accounts, numAccounts);
                 break;
             case 4:
                 performTransaction(accounts, numAccounts, name, surname);
-                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 5:
                 printf("Exiting...\n");
+                saveAccountsToFile(accounts, &numAccounts);
                 break;
             case 6:
                 createAccount(accounts, &numAccounts);
-                saveAccountsToFile(accounts, &numAccounts);
             default:
                 printFAIL(1);
         }
+        if (choice != 5 && choice <=6){
+            saveAccountsToFile(accounts, &numAccounts);
+        } 
+        
         printf("Press Enter to continue...");
         getchar();
         getchar();
 
     } while(choice != 5);
-    
-    saveAccountsToFile(accounts, &numAccounts);
     return 0;
 }
+    
