@@ -1,11 +1,10 @@
 # bank_management_system
 
-work in progress
+> [!WARNING]  
+> work in progress
 
-## run like this:
 
-using the following command:
-##
+## run, using the following command:
     ./main [NAME] [SURNAME]
 
 
