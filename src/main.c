@@ -16,7 +16,6 @@ GitHub: https://https://github.com/ml3m
 #include <stdlib.h>
 #include <string.h>
 
-/*create account flag implementaiton*/
 int main(int argc, char *argv[]) {
     
     if (argc == 1 || argc >3){
@@ -28,22 +27,39 @@ int main(int argc, char *argv[]) {
     char user_accounts[MAX_USER_ACCOUNTS][MAX_IBAN_LENGTH];
     Account accounts[MAX_ACCOUNTS];
     int numAccounts = loadAccountsFromFile(accounts); 
-
+    char *name, *surname;
+    int new_account_login_marker = 0;
     char *create_flag = argv[1];
+    
+    // -c / -create flag handling 
     if ((strcmp(create_flag, "-c")== 0 || strcmp(create_flag, "-create")==0)&& argc == 2) {
+        new_account_login_marker = 1;
         createAccount(accounts, &numAccounts);
-        printf("login in.. with created account...");
-        
-        return 1;
-        //login with last account created in accounts.txt 
+        printf("login in.. with created account...\n");
+        char cli_user_choice;
+        printf("do you want to log in with the created account? (y/n)\n>");
+        scanf(" %c", &cli_user_choice);
+        if(cli_user_choice == 'y' || cli_user_choice == 'Y'){
+            printf("log in behaviour\n");
+        }else {
+            printf("finished!...\n");
+            return 1;
+        }
     }
-
+                /* works implemented */
     // logic between noromal mode and -c
     // wanted behaviour: create account and log in imediately(make prompted, asked), 
     // accounts loaded for that person(the one created) -> function should work normal, saving also.
+    
 
-    char *name = argv[1];
-    char *surname = argv[2];
+    if(new_account_login_marker){
+        name = accounts[numAccounts -1].owner.name;
+        surname= accounts[numAccounts -1].owner.surname;
+
+    }else {
+        name = argv[1];
+        surname = argv[2];
+    }
     loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
     login(name, surname, accounts, numAccounts);
 
@@ -51,6 +67,7 @@ int main(int argc, char *argv[]) {
     do {
         system("clear");
         printHeader();
+        printf("hello_debug\n");
         sayHello(name, surname);
         printUserAccounts(user_accounts);
         printMainMenu();

@@ -78,6 +78,7 @@ void createAccount(Account *accounts, int *numAccounts){
 }
 
 /* works properly, currency exchange ignored for now */ 
+/* iban also change when deposit*/
 void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
 
@@ -85,10 +86,10 @@ void editAccount(Account *accounts, const int numAccounts) {
     scanf("%s", iban);
 
     int i;
+    int choice;
     for (i = 0; i < numAccounts; ++i) {
         if (strcmp(iban, accounts[i].IBAN) == 0) {
             printEditAccount(iban); 
-            int choice;
             scanf("%d", &choice);
 
             switch (choice) {
@@ -107,9 +108,6 @@ void editAccount(Account *accounts, const int numAccounts) {
                     int changed_coin;
                     scanf("%d", &changed_coin);
                     accounts[i].coin = changed_coin - 1;
-                    //switch need verification
-                    //
-                    // works properly
                     switch (changed_coin) {
                         case 1: 
                             accounts[i].IBAN[0]= 'R';
@@ -153,6 +151,10 @@ void editAccount(Account *accounts, const int numAccounts) {
                             printf("Fail?");
                             break;
                     }
+                    break;
+                    // this break was in the switch this was the bug
+// why is it being executed after 4
+// update this line is making me laugh out loud
                 case 5:
                     printf("Old IBAN: %s\n", accounts[i].IBAN);
                     char *newuniqueIBAN = generateUniqueIBAN(accounts, numAccounts);
