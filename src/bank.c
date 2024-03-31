@@ -317,7 +317,12 @@ void loadUserAccounts(char user_accounts[][9],
 
 
 /*works properly, currency conversion wansn't implemented yet*/
-void performTransaction(Account *accounts, const int numAccounts, const char *sysuser, const char *syssurname) {
+void performTransaction(
+        Account *accounts, 
+        const int numAccounts, 
+        const char *sysuser, 
+        const char *syssurname)
+{
     float amount;
     char dest_iban[MAX_IBAN_LENGTH]; 
     char source_iban[MAX_IBAN_LENGTH]; 

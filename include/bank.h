@@ -30,14 +30,24 @@ typedef struct {
     double amount;
 } Account;
 
-void login(const char *name, const char *surname,const Account *accounts, const int numAccounts);
 void createAccount(Account *accounts, int *numAccounts);
 void editAccount(Account *accounts, const int numAccounts);
 void deleteAccount(Account *accounts, int *numAccounts);
 void viewAccount(const Account *accounts, const int numAccounts);
 void saveAccountsToFile(const Account *accounts, const int *numAccounts);
 int loadAccountsFromFile(Account *accounts);
-void loadUserAccounts(char user_accounts[][MAX_IBAN_LENGTH], const int numAccounts, const Account *accounts, const char *sysuser, const char *syssurname);
-void performTransaction(Account *accounts, const int numAccounts, const char *sysuser, const char *syssurname);
+void login(const char *name, 
+           const char *surname,
+           const Account *accounts, 
+           const int numAccounts);
+void loadUserAccounts(char user_accounts[][MAX_IBAN_LENGTH], 
+                      const int numAccounts, 
+                      const Account *accounts, 
+                      const char *sysuser, 
+                      const char *syssurname);
+void performTransaction(Account *accounts, 
+                        const int numAccounts, 
+                        const char *sysuser, 
+                        const char *syssurname);
 
 #endif 
