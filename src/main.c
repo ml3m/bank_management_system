@@ -87,15 +87,15 @@ int main(int argc, char *argv[]) {
                 performTransaction(accounts, numAccounts, name, surname);
                 break;
             case 5:
+                createAccount(accounts, &numAccounts);
+            case 6:
                 printf("Exiting...\n");
                 saveAccountsToFile(accounts, &numAccounts);
                 break;
-            case 6:
-                createAccount(accounts, &numAccounts);
             default:
                 printFAIL(1);
         }
-        if (choice != 5 && choice <=6){
+        if (choice != 6 && choice <6){
             saveAccountsToFile(accounts, &numAccounts);
         } 
         
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
         getchar();
         getchar();
 
-    } while(choice != 5);
+    } while(choice != 6);
     return 0;
 }
     

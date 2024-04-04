@@ -27,6 +27,7 @@ void login(const char *name, const char *surname, const Account *accounts, const
     exit(1);
 }
 
+/*printing and console clear work here*/
 void createAccount(Account *accounts, int *numAccounts){
     
     int chosen_coin;

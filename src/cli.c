@@ -38,8 +38,8 @@ void printMainMenu(){
     printf("2. Delete Account\n");
     printf("3. View Account\n");
     printf("4. Perform Transaction\n");
-    printf("5. Exit\n");
-    printf("6. Create Account\n"ANSI_COLOR_RESET);
+    printf("5. Create Account\n");
+    printf("6. Exit\n"ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 
