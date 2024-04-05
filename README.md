@@ -22,13 +22,13 @@
 > more features to be added.
 
 
-## using the following commands:
+## Usage:
 ### Connect to an existing user in database
-    ./main [NAME] [SURNAME]
+    ./login [NAME] [SURNAME]
 ### Create Account (new user)
-    ./main -c
+    ./login -c
      or
-    ./main -create
+    ./login -create
 ##
 <p align="center"><img src="./assets/ss1.png" /></a></p>
 <p align="center"><img src="./assets/ss2.png" /></a></p>
