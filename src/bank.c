@@ -13,6 +13,7 @@ GitHub: https://https://github.com/ml3m
 #include <string.h>
 #include <time.h>
 #include "iban_generator.h"
+#include "paths.h"
 
 /*works like a charm*/
 void login(const char *name, const char *surname, const Account *accounts, const int numAccounts) {
@@ -254,7 +255,7 @@ void viewAccount(const Account *accounts, const int numAccounts) {
 }
 
 void saveAccountsToFile(const Account *accounts, const int *numAccounts) {
-    FILE *file = fopen("accounts.txt", "w");
+    FILE *file = fopen(ACCOUNTS_FILE_PATH, "w");
     if (file == NULL) {
         printFAIL(6); 
         return;
@@ -274,7 +275,7 @@ void saveAccountsToFile(const Account *accounts, const int *numAccounts) {
 }
 
 int loadAccountsFromFile(Account *accounts) {
-    FILE *file = fopen("accounts.txt", "r");
+    FILE *file = fopen(ACCOUNTS_FILE_PATH, "r");
     if (file == NULL) {
         printFAIL(5);
         return 0;
