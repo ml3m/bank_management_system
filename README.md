@@ -9,7 +9,7 @@
     ./main [NAME] [SURNAME]
 ### create account (new user)
     ./main -c
-    or
+     or
     ./main -create
 <p align="center"><img src="./assets/ss1.png" /></a></p>
 <p align="center"><img src="./assets/ss2.png" /></a></p>
