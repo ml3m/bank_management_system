@@ -19,7 +19,7 @@
 ###
 > [!NOTE]  
 > more features to be added.
-### Instalation
+### Installation
     git clone https://github.com/ml3m/bank_management_system
 cd repository
 
