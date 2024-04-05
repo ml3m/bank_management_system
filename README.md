@@ -36,7 +36,8 @@ Makefile using gcc:
 or
 
     ./login -create
-##
+    
+## Screenshots
 <p width="200" align="center"><img src="./assets/ss1.png" /></a></p>
 
 ##
