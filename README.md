@@ -22,6 +22,7 @@
 > more features to be added.
 ### Instalation
     git clone https://github.com/ml3m/bank_management_system
+##
     make
 
 ## Usage:
@@ -29,7 +30,8 @@
     ./login [NAME] [SURNAME]
 ### Create Account (new user)
     ./login -c
-     or
+or
+
     ./login -create
 ##
 <p align="center"><img src="./assets/ss1.png" /></a></p>
