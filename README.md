@@ -1,5 +1,5 @@
 # bank_management_system
-
+    ## Features
 ### Account Creation: 
 - Allows bank staff to create new customer accounts by inputting necessary details such as name, surname, currency, etc.
 
