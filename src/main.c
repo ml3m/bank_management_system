@@ -57,7 +57,6 @@ int main(int argc, char *argv[]) {
         surname = argv[2];
     }
 
-
     login(name, surname, accounts, numAccounts);
     int choice;
     do {

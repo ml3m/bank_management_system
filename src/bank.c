@@ -66,7 +66,6 @@ void createAccount(Account *accounts, int *numAccounts){
     } 
 
     /* printing is messed up here*/ 
-
     system("clear");
     strcpy(accounts[*numAccounts].IBAN, uniqueIBAN);
     printf("iban: %s",uniqueIBAN);
@@ -341,7 +340,6 @@ void performTransaction(
         if (strcmp(accounts[i].IBAN, source_iban) == 0 && 
             strcmp(accounts[i].owner.name, sysuser) == 0 &&
             strcmp(accounts[i].owner.surname, syssurname) == 0){
-
                if (accounts[i].amount >= amount) {
                     for (int j = 0; j< numAccounts; j++) {
                         // see accounts being compared i think I don't 
