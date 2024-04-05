@@ -10,6 +10,7 @@ Description: main function :)
 GitHub: https://https://github.com/ml3m
 ================================================================================
 */
+
 #include "bank.h"
 #include "cli.h"
 #include <stdio.h>
@@ -46,11 +47,6 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     }
-                /* works implemented */
-    // logic between noromal mode and -c
-    // wanted behaviour: create account and log in imediately(make prompted, asked), 
-    // accounts loaded for that person(the one created) -> function should work normal, saving also.
-    
 
     if(new_account_login_marker){
         name = accounts[numAccounts -1].owner.name;
@@ -60,11 +56,12 @@ int main(int argc, char *argv[]) {
         name = argv[1];
         surname = argv[2];
     }
-    loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
-    login(name, surname, accounts, numAccounts);
 
+
+    login(name, surname, accounts, numAccounts);
     int choice;
     do {
+        loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
         system("clear");
         printHeader();
         printf("hello_debug\n");

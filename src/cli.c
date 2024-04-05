@@ -1,5 +1,5 @@
 /*
-, ================================================================================
+================================================================================
 File: cli.c
 Author: mlem 
 Description: this file provides the required cli printing.
@@ -119,6 +119,9 @@ void printPASS(const int choice){
             break;
         case 4:
             printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "Owner's surname updated successfully!\n" ANSI_COLOR_RESET);
+            break;
+        case 5:
+            printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "Account created successfully!\n" ANSI_COLOR_RESET);
             break;
     }
 }

@@ -40,6 +40,7 @@ void createAccount(Account *accounts, int *numAccounts){
     printf("account surname\n> "); 
     scanf("%s",accounts[*numAccounts].owner.surname);
 
+    system("clear");
     printCreateCurrency();
 
     scanf("%d", &chosen_coin);
@@ -64,22 +65,25 @@ void createAccount(Account *accounts, int *numAccounts){
             break;
     } 
 
+    /* printing is messed up here*/ 
+
+    system("clear");
     strcpy(accounts[*numAccounts].IBAN, uniqueIBAN);
     printf("iban: %s",uniqueIBAN);
     (*numAccounts)++;
+    /*
     printf("data entered:\n");
     printf("name:%s\n",accounts[*numAccounts].owner.name);
     printf("surname:%s\n",accounts[*numAccounts].owner.surname);
     printf("coin:%d\n", accounts[*numAccounts].coin);
     printf("ammount:%f\n", accounts[*numAccounts].amount);
+    */
+    printPASS(5);
     free(uniqueIBAN);    
-
-    //we dont't need this technically
     saveAccountsToFile(accounts, numAccounts);
 }
 
 /* works properly, currency exchange ignored for now */ 
-/* iban also change when deposit*/
 void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
 
@@ -153,9 +157,6 @@ void editAccount(Account *accounts, const int numAccounts) {
                             break;
                     }
                     break;
-                    // this break was in the switch this was the bug
-// why is it being executed after 4
-// update this line is making me laugh out loud
                 case 5:
                     printf("Old IBAN: %s\n", accounts[i].IBAN);
                     char *newuniqueIBAN = generateUniqueIBAN(accounts, numAccounts);
@@ -186,8 +187,7 @@ void editAccount(Account *accounts, const int numAccounts) {
     printFAIL(2);
 }
 
-/*works properly, the enter key confirmation doesn't
- * more testing required*/
+/*works properly, the enter key confirmation doesn't*/
 void deleteAccount(Account *accounts, int *numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printDeleteAccountHeader();
@@ -223,13 +223,10 @@ void deleteAccount(Account *accounts, int *numAccounts) {
 }
 
 void viewAccount(const Account *accounts, const int numAccounts) {
-    // UI/UX work needed here... make it beautiful, add colors
-
     char iban[MAX_IBAN_LENGTH];
     printf("Enter the IBAN of account you want to see information: ");
     scanf("%s", iban);
     int found = 0;
-
 
     for (int i = 0; i< numAccounts; i++) {
         if(strcmp(accounts[i].IBAN,iban)== 0){
