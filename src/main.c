@@ -63,7 +63,6 @@ int main(int argc, char *argv[]) {
         loadUserAccounts(user_accounts, numAccounts, accounts, name, surname);
         system("clear");
         printHeader();
-        printf("hello_debug\n");
         sayHello(name, surname);
         printUserAccounts(user_accounts);
         printMainMenu();
