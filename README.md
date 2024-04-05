@@ -1,7 +1,7 @@
 # bank_management_system
 
-> [!WARNING]  
-> work in progress
+> [!NOTE]  
+> more features to be added.
 
 
 ## run, using the following command:
