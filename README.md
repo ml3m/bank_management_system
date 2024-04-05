@@ -20,7 +20,9 @@
 ##
 > [!NOTE]  
 > more features to be added.
-
+### Instalation
+    git clone https://github.com/ml3m/bank_management_system
+    make
 
 ## Usage:
 ### Connect to an existing user in database
