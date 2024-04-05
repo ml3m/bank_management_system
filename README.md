@@ -36,8 +36,10 @@ Makefile using gcc:
 or
 
     ./login -create
+## 
 ##
-![drawing](./assets/ss1.png){ width=50% }
 <p width="200" align="center"><img src="./assets/ss1.png" /></a></p>
+##
 <p width="200" align="center"><img src="./assets/ss2.png" /></a></p>
+##
 <p width="200" align="center"><img src="./assets/ss3.png" /></a></p>
