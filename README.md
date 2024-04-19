@@ -2,6 +2,10 @@
 ### Account Creation: 
 - Allows bank staff to create new customer accounts by inputting necessary details such as name, surname, currency, etc.
 
+### Account Editing:
+- Coin Exchange: This feature facilitates coin exchange, where the balance is exchanged based on the global exchange rates. It was implemented using cJSON/API/Curl.
+- Transactions between different coin accounts: Transactions between different coin accounts will be updated to reflect the same global exchange rates.
+
 ### Deposit and Withdrawal: 
 - Enables account holders to deposit or withdraw funds from their accounts. Users can specify the amount to deposit/withdraw and the system updates the account balance accordingly.
 
