@@ -58,7 +58,11 @@ int main(int argc, char *argv[]) {
         surname = argv[2];
     }
 
-    /*
+    /********** just some very serious testing here *************************
+     *
+     * api can be accesed via rates struct - > CurrencyRates and the fetch function accordingly
+     * 
+     *
     // hahahhahhahahahahah
     //print_test_api_handlingC();
     //preparing_exCOIN();
@@ -66,14 +70,17 @@ int main(int argc, char *argv[]) {
     CurrencyRates rates = fetch_currency_rates();
 
     printf("exUSD to exEUR rate: %.10f\n", rates.exEUR);
+
     // Print test API results
     //print_test_api_handlingC();
+    //
     CurrencyRates rates
     return 0;
 
     CurrencyRates rates = fetch_currency_rates();
     printf("exUSD to exEUR rate: %.10f\n", rates.exUSDtoexEUR);
     return 0;
+
     */
     
 

@@ -30,7 +30,6 @@ void login(const char *name, const char *surname, const Account *accounts, const
     exit(1);
 }
 
-/*printing and console clear work here*/
 void createAccount(Account *accounts, int *numAccounts){
     
     int chosen_coin;
@@ -85,13 +84,12 @@ void createAccount(Account *accounts, int *numAccounts){
     saveAccountsToFile(accounts, numAccounts);
 }
 
-/* works properly, currency exchange ignored NOTANYMOREEE for now */ 
+/* works properly, currency exchange UPDATE in on*/ 
 void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
 
-    /***********implement rates here************/
+    /***********implement fetch rates here************/
     CurrencyRates rates = fetch_currency_rates();
-    printf("exRON to exEUR rate: %.10f\n", rates.exRONtoexEUR);
 
     editHeader();
     scanf("%s", iban);
@@ -242,7 +240,7 @@ void editAccount(Account *accounts, const int numAccounts) {
     printFAIL(2);
 }
 
-/*works properly, the enter key confirmation doesn't*/
+/*works properly, the enter key confirmation doesn't idk how to fix it*/
 void deleteAccount(Account *accounts, int *numAccounts) {
     char iban[MAX_IBAN_LENGTH];
     printDeleteAccountHeader();
@@ -369,7 +367,7 @@ void loadUserAccounts(char user_accounts[][9],
 }
 
 
-/*works properly, currency conversion wansn't implemented yet*/
+/*works properly, currency conversion wansn't implemented YETTT*/
 void performTransaction(
         Account *accounts, 
         const int numAccounts, 

@@ -18,14 +18,11 @@ void printUserAccounts(const char user_accounts[][9]){
 }
 
 void printHeader() {
-    //idea: change stars with equal type symbol
     printf(ANSI_BOLD_START "\t=============================================\n");
-    //printf(ANSI_BOLD_START ANSI_COLOR_BLUE "\t*********************************************\n");
     printf("\t|          "ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA ANSI_BOLD_START "MlemBank - Banking App"ANSI_COLOR_RESET);
     printf(ANSI_BOLD_START "           |\n");
     printf("\t=============================================\n" ANSI_COLOR_RESET);
-    //printf("\t*********************************************\n" ANSI_COLOR_RESET);
 }
 
 void sayHello(const char *name, const char *surname){
