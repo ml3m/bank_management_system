@@ -78,16 +78,20 @@ void createAccount(Account *accounts, int *numAccounts){
     printf("name:%s\n",accounts[*numAccounts].owner.name);
     printf("surname:%s\n",accounts[*numAccounts].owner.surname);
     printf("coin:%d\n", accounts[*numAccounts].coin);
-    printf("ammount:%f\n", accounts[*numAccounts].amount);
+    printf("amount:%f\n", accounts[*numAccounts].amount);
     */
     printPASS(5);
     free(uniqueIBAN);    
     saveAccountsToFile(accounts, numAccounts);
 }
 
-/* works properly, currency exchange ignored for now */ 
+/* works properly, currency exchange ignored NOTANYMOREEE for now */ 
 void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
+
+    /***********implement rates here************/
+    CurrencyRates rates = fetch_currency_rates();
+    printf("exRON to exEUR rate: %.10f\n", rates.exRONtoexEUR);
 
     editHeader();
     scanf("%s", iban);
@@ -114,7 +118,56 @@ void editAccount(Account *accounts, const int numAccounts) {
                     printChangeCurrency();
                     int changed_coin;
                     scanf("%d", &changed_coin);
+                    switch (accounts[i].coin) {
+                        case 0:
+                            //changing from ron
+                            if (changed_coin - 1 == accounts[i].coin) {
+                                break;//nothing happens ron ron 
+                            }
+                            if (changed_coin - 1 == 1) {
+                                //exRONtoexEUR;
+                                accounts[i].amount *= rates.exRONtoexEUR;
+                                break;
+                            }
+                            if (changed_coin - 1 == 2){
+                                //exRONtoexUSD;
+                                accounts[i].amount *= rates.exRONtoexUSD;
+                                break;
+                            }
+                            break;
+                        case 1:
+                            if (changed_coin - 1 == accounts[i].coin) {
+                                break;//nothing happens eur eur
+                            }
+                            if (changed_coin - 1 == 0) {
+                                //exEURtoexRON;
+                                accounts[i].amount *= rates.exEURtoexRON;
+                                break;
+                            }
+                            if (changed_coin - 1 == 2){
+                                //exEURtoexUSD;
+                                accounts[i].amount *= rates.exEURtoexUSD;
+                                break;
+                            }
+                            break;
+                        case 2:
+                            if (changed_coin - 1 == accounts[i].coin) {
+                                break;//nothing happens usd usd 
+                            }
+                            if (changed_coin - 1 == 1) {
+                                //exUSDtoexEUR;
+                                accounts[i].amount *= rates.exUSDtoexEUR;
+                                break;
+                            }
+                            if (changed_coin - 1 == 0){
+                                //exUSDtoexRON;
+                                accounts[i].amount *= rates.exUSDtoexRON;
+                                break;
+                            }
+                            break;
+                    }
                     accounts[i].coin = changed_coin - 1;
+
                     switch (changed_coin) {
                         case 1: 
                             accounts[i].IBAN[0]= 'R';
@@ -138,19 +191,19 @@ void editAccount(Account *accounts, const int numAccounts) {
                     printf("1. Withdraw\n");
                     printf("2. Deposit\n");
                     int option;
-                    int option_ammount;
+                    int option_amount;
                     scanf("%d", &option);
                     switch (option) {
                         case 1:
-                            printf("Withdrawal ammount: ");
-                            scanf("%d", &option_ammount);
-                            accounts[i].amount -= option_ammount;
+                            printf("Withdrawal amount: ");
+                            scanf("%d", &option_amount);
+                            accounts[i].amount -= option_amount;
                             printPASS(1);
                             break;
                         case 2:
-                            printf("Deposit ammount: ");
-                            scanf("%d", &option_ammount);
-                            accounts[i].amount += option_ammount;
+                            printf("Deposit amount: ");
+                            scanf("%d", &option_amount);
+                            accounts[i].amount += option_amount;
                             printPASS(1);
                             break;
                         default:
@@ -328,6 +381,9 @@ void performTransaction(
     char source_iban[MAX_IBAN_LENGTH]; 
     int successfully = 0;
 
+    // in work !
+    //CurrencyRates rates = fetch_currency_rates();
+
     printf("Enter source account IBAN: ");
     scanf("%s", source_iban);
     printf("Enter amount to transfer: ");
@@ -345,15 +401,14 @@ void performTransaction(
             strcmp(accounts[i].owner.surname, syssurname) == 0){
                if (accounts[i].amount >= amount) {
                     for (int j = 0; j< numAccounts; j++) {
-                        // see accounts being compared i think I don't 
-                        // remember when this was written D:
-                        // printf("accounts[%d]=%s\n",i,accounts[j].IBAN);
-                        // printf("dest_iban=%s",dest_iban);
+                        /*********************** inplement here transactions between different coins exchange ***********************/
                         if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+
                             successfully = 1;
                             accounts[i].amount -= amount;
                             accounts[j].amount += amount;
                             break;
+
                         }
                     }
                }else{

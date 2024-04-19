@@ -58,6 +58,25 @@ int main(int argc, char *argv[]) {
         surname = argv[2];
     }
 
+    /*
+    // hahahhahhahahahahah
+    //print_test_api_handlingC();
+    //preparing_exCOIN();
+    
+    CurrencyRates rates = fetch_currency_rates();
+
+    printf("exUSD to exEUR rate: %.10f\n", rates.exEUR);
+    // Print test API results
+    //print_test_api_handlingC();
+    CurrencyRates rates
+    return 0;
+
+    CurrencyRates rates = fetch_currency_rates();
+    printf("exUSD to exEUR rate: %.10f\n", rates.exUSDtoexEUR);
+    return 0;
+    */
+    
+
     login(name, surname, accounts, numAccounts);
     int choice;
     do {

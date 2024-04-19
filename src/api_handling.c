@@ -2,12 +2,9 @@
 #include <string.h>
 #include <curl/curl.h>
 #include "cJSON.h"
+#include "api_handling.h"
 
 // Struct to hold currency rates
-typedef struct {
-    double exEUR;
-    double exRON;
-} CurrencyRates;
 
 // Callback function to handle HTTP response
 size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
@@ -57,6 +54,12 @@ CurrencyRates fetch_currency_rates() {
         fprintf(stderr, "Failed to initialize libcurl\n");
     }
 
+    rates.exRONtoexEUR =  rates.exEUR / rates.exRON;
+    rates.exRONtoexUSD = 1/ rates.exRON;
+    rates.exEURtoexRON = rates.exRON / rates.exEUR;
+    rates.exEURtoexUSD = 1 / rates.exEUR;
+    rates.exUSDtoexRON = rates.exRON;
+    rates.exUSDtoexEUR = rates.exEUR; 
     return rates;
 }
 /*

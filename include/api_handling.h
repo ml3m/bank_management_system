@@ -10,6 +10,7 @@
 typedef struct {
     double exEUR;
     double exRON;
+    double exRONtoexEUR ,exRONtoexUSD, exEURtoexRON, exEURtoexUSD, exUSDtoexRON ,exUSDtoexEUR;
 } CurrencyRates;
 
 // Function prototypes
