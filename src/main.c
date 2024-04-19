@@ -58,9 +58,6 @@ int main(int argc, char *argv[]) {
         surname = argv[2];
     }
 
-    print_test_api_handlingC();
-    return 0;
-
     login(name, surname, accounts, numAccounts);
     int choice;
     do {

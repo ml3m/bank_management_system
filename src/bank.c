@@ -16,6 +16,7 @@ GitHub: https://https://github.com/ml3m
 #include "api_handling.h"
 #include "paths.h"
 
+
 /*works like a charm*/
 void login(const char *name, const char *surname, const Account *accounts, const int numAccounts) {
     for (int i = 0; i< numAccounts; ++i){
@@ -43,7 +44,7 @@ void createAccount(Account *accounts, int *numAccounts){
     scanf("%s",accounts[*numAccounts].owner.surname);
 
     system("clear");
-    printCreateCurrency();
+    
 
     scanf("%d", &chosen_coin);
     accounts[*numAccounts].coin = chosen_coin - 1;
