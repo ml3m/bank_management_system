@@ -19,7 +19,7 @@
 ###
 > [!NOTE]  
 > more features to be added.
-### Instalation
+### Installation
     git clone https://github.com/ml3m/bank_management_system
 cd repository
 
@@ -36,7 +36,14 @@ Makefile using gcc:
 or
 
     ./login -create
+    
+## Screenshots
+<p width="200" align="center"><img src="./assets/ss1.png" /></a></p>
+
 ##
-<p align="center"><img src="./assets/ss1.png" /></a></p>
-<p align="center"><img src="./assets/ss2.png" /></a></p>
-<p align="center"><img src="./assets/ss3.png" /></a></p>
+
+<p width="200" align="center"><img src="./assets/ss2.png" /></a></p>
+
+##
+
+<p width="200" align="center"><img src="./assets/ss3.png" /></a></p>
