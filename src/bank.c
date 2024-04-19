@@ -13,6 +13,7 @@ GitHub: https://https://github.com/ml3m
 #include <string.h>
 #include <time.h>
 #include "iban_generator.h"
+#include "api_handling.h"
 #include "paths.h"
 
 /*works like a charm*/

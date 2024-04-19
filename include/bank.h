@@ -30,6 +30,7 @@ typedef struct {
     double amount;
 } Account;
 
+void api_test_exchangeRates();
 void createAccount(Account *accounts, int *numAccounts);
 void editAccount(Account *accounts, const int numAccounts);
 void deleteAccount(Account *accounts, int *numAccounts);
