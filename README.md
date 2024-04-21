@@ -29,6 +29,7 @@ cd repository
 
     cd bank_management_system
 ### Dependencies
+#### (curl/curl.h)
     libcurl4-gnutls-dev
 Makefile using gcc:
 
