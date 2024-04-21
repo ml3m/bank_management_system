@@ -71,12 +71,13 @@ void print_test_api_handlingC() {
     time(&rawtime);
     timeinfo = localtime(&rawtime);
 
+    /*
     // cause of os clock being -2 lol 
     timeinfo->tm_hour -= 2;
     if (timeinfo->tm_hour < 0) {
         timeinfo->tm_hour += 24; 
     }
-
+    */
     system("clear");
 
     //printf("%s",asctime(timeinfo)); // default 

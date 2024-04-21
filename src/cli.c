@@ -25,7 +25,8 @@ void printUserAccounts(const char user_accounts[][9]){
 void printHeader() {
     printf(ANSI_BOLD_START "\t╔═══════════════════════════════════════════╗\n");
     printf("\t║          "ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_MAGENTA ANSI_BOLD_START "MlemBank - Banking App"ANSI_COLOR_RESET);
+    printf("Mlem");
+    printf(ANSI_COLOR_MAGENTA"Bank - Banking App" ANSI_COLOR_RESET);
     printf(ANSI_BOLD_START "           ║\n");
     printf                ("\t╚═══════════════════════════════════════════╝\n" ANSI_COLOR_RESET);
 }

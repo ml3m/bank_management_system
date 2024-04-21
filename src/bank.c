@@ -425,6 +425,8 @@ void performTransaction(
                         char source_coin_symbol[4];
                         char destination_coin_symbol[4];
 
+                        accounts[i].amount -= amount;
+
                         // not touching this 
                         switch (source_coin) {
                             case 0:
@@ -495,7 +497,6 @@ void performTransaction(
                         printf("Using the following Exchange Rate: \n%s/%s  = ",source_coin_symbol, destination_coin_symbol);
                         printf("%.6f\n",used_rate);
 
-                        accounts[i].amount -= amount;
                         accounts[j].amount += amount;
                         break;
                     }
