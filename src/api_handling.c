@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
 #include "cJSON.h"
 #include "api_handling.h"
+#include <time.h>
 
 
 // HTTP  
@@ -59,12 +61,41 @@ CurrencyRates fetch_currency_rates() {
     rates.exUSDtoexEUR = rates.exEUR; 
     return rates;
 }
+
 void print_test_api_handlingC() {
     CurrencyRates rates = fetch_currency_rates();
-    printf("exRON to exEUR rate: %.10f\n", rates.exEUR / rates.exRON);
-    printf("exRON to exUSD rate: %.10f\n", 1/ rates.exRON);
-    printf("exEUR to exRON rate: %.10f\n", rates.exRON / rates.exEUR);
-    printf("exEUR to exUSD rate: %.10f\n", 1 / rates.exEUR);
-    printf("exUSD to exRON rate: %.10f\n", rates.exRON);
-    printf("exUSD to exEUR rate: %.10f\n", rates.exEUR);
+
+    time_t rawtime;
+    struct tm *timeinfo;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    // cause of os clock being -2 lol 
+    timeinfo->tm_hour -= 2;
+    if (timeinfo->tm_hour < 0) {
+        timeinfo->tm_hour += 24; 
+    }
+
+    system("clear");
+
+    //printf("%s",asctime(timeinfo)); // default 
+
+    printf("\n\t┌────────────────────────────────────────────────┐\n");
+    printf("\t│ Exchange Rate:   │   %.*s  │\n", (int)(strlen(asctime(timeinfo)) - 1), asctime(timeinfo));
+    printf("\t└────────────────────────────────────────────────┘\n\n");
+
+    printf("\t\t┌──────────┬──────────┬──────────┐\n");
+    printf("\t\t│   RON    │   EUR    │ %.6f │\n", rates.exRONtoexEUR);
+    printf("\t\t├──────────┼──────────┼──────────┤\n");
+    printf("\t\t│   RON    │   USD    │ %.6f │\n", rates.exRONtoexUSD);
+    printf("\t\t├──────────┼──────────┼──────────┤\n");
+    printf("\t\t│   EUR    │   RON    │ %.6f │\n", rates.exEURtoexRON);
+    printf("\t\t├──────────┼──────────┼──────────┤\n");
+    printf("\t\t│   EUR    │   USD    │ %.6f │\n", rates.exEURtoexUSD);
+    printf("\t\t├──────────┼──────────┼──────────┤\n");
+    printf("\t\t│   USD    │   RON    │ %.6f │\n", rates.exUSDtoexRON);
+    printf("\t\t├──────────┼──────────┼──────────┤\n");
+    printf("\t\t│   USD    │   EUR    │ %.6f │\n", rates.exUSDtoexEUR);
+    printf("\t\t└──────────┴──────────┴──────────┘\n\n");
 }

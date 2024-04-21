@@ -80,8 +80,7 @@ int main(int argc, char *argv[]) {
     CurrencyRates rates = fetch_currency_rates();
     printf("exUSD to exEUR rate: %.10f\n", rates.exUSDtoexEUR);
     return 0;
-
-    */
+    */ /********** just some very serious testing here *************************/
     
 
     login(name, surname, accounts, numAccounts);
@@ -110,14 +109,19 @@ int main(int argc, char *argv[]) {
                 break;
             case 5:
                 createAccount(accounts, &numAccounts);
+                break;
             case 6:
+                //working accordingly
+                print_test_api_handlingC();
+                break;
+            case 7:
                 printf("Exiting...\n");
                 saveAccountsToFile(accounts, &numAccounts);
                 break;
             default:
                 printFAIL(1);
         }
-        if (choice != 6 && choice <6){
+        if (choice != 7 && choice <7){
             saveAccountsToFile(accounts, &numAccounts);
         } 
         
@@ -125,7 +129,7 @@ int main(int argc, char *argv[]) {
         getchar();
         getchar();
 
-    } while(choice != 6);
+    } while(choice != 7);
     return 0;
 }
     

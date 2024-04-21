@@ -7,22 +7,27 @@ GitHub: https://https://github.com/ml3m
 ================================================================================
 */
 #include "cli.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 void printUserAccounts(const char user_accounts[][9]){
     printf(ANSI_BOLD_START "Owned Accounts:\n\n" ANSI_COLOR_RESET);
+    printf("\t┌───────────────┐\n");
     for (int i =0;user_accounts[i][0]!= '\0'; i++) {
-        printf("\t%dAC:", i); 
-        printf(ANSI_UNDERLINE_START"%s\n"ANSI_COLOR_RESET, user_accounts[i]); 
+        if (i>0) {
+            printf("\t├───────────────┤\n");
+        }
+        printf("\t│ %dAC: %s │\n"ANSI_COLOR_RESET, i+1, user_accounts[i]); 
     }
+    printf("\t└───────────────┘\n");
 }
 
 void printHeader() {
-    printf(ANSI_BOLD_START "\t=============================================\n");
-    printf("\t|          "ANSI_COLOR_RESET);
+    printf(ANSI_BOLD_START "\t╔═══════════════════════════════════════════╗\n");
+    printf("\t║          "ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA ANSI_BOLD_START "MlemBank - Banking App"ANSI_COLOR_RESET);
-    printf(ANSI_BOLD_START "           |\n");
-    printf("\t=============================================\n" ANSI_COLOR_RESET);
+    printf(ANSI_BOLD_START "           ║\n");
+    printf                ("\t╚═══════════════════════════════════════════╝\n" ANSI_COLOR_RESET);
 }
 
 void sayHello(const char *name, const char *surname){
@@ -36,19 +41,21 @@ void printMainMenu(){
     printf("3. View Account\n");
     printf("4. Perform Transaction\n");
     printf("5. Create Account\n");
-    printf("6. Exit\n"ANSI_COLOR_RESET);
+    printf("6. See Exchange Rates\n");
+    printf("7. Exit\n\n"ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 
 void printEditAccount(const char *iban){
-    printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "Account found "ANSI_COLOR_RESET);
-    printf("Editing account: ");
+    system("clear");
+    printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "\nAccount found "ANSI_COLOR_RESET);
+    printf("\n\nEditing account: ");
     printf(ANSI_BOLD_START "%s\n", iban);
     printf("\n1. Change owner's name\n");
     printf("2. Change owner's surname\n");
     printf("3. Change currency type\n");
     printf("4. Change currency ammount\n");
-    printf("5. Renew IBAN\n"ANSI_COLOR_RESET);
+    printf("5. Renew IBAN\n\n"ANSI_COLOR_RESET);
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 

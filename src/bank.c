@@ -41,11 +41,12 @@ void createAccount(Account *accounts, int *numAccounts){
     scanf("%s",accounts[*numAccounts].owner.name);
     printf("account surname\n> "); 
     scanf("%s",accounts[*numAccounts].owner.surname);
+    printCreateCurrency();
+    scanf("%d", &chosen_coin);
 
     system("clear");
     
 
-    scanf("%d", &chosen_coin);
     accounts[*numAccounts].coin = chosen_coin - 1;
     accounts[*numAccounts].amount = 0.00;
     
@@ -73,11 +74,14 @@ void createAccount(Account *accounts, int *numAccounts){
     printf("iban: %s",uniqueIBAN);
     (*numAccounts)++;
     /*
-    printf("data entered:\n");
-    printf("name:%s\n",accounts[*numAccounts].owner.name);
-    printf("surname:%s\n",accounts[*numAccounts].owner.surname);
-    printf("coin:%d\n", accounts[*numAccounts].coin);
-    printf("amount:%f\n", accounts[*numAccounts].amount);
+    printf("+-----------------------------------------+\n");
+    printf("|             Bank Account Details        |\n");
+    printf("+-----------------------------------------+\n");
+    printf("| Owner's Name:          %-20s |\n", accounts[*numAccounts].owner.name);
+    printf("| Owner's Surname:       %-20s |\n", accounts[*numAccounts].owner.surname);
+    printf("| Account Balance (Coins): %-14d |\n", accounts[*numAccounts].coin);
+    printf("| Account Balance (Amount): %.2f          |\n", accounts[*numAccounts].amount);
+    printf("+-----------------------------------------+\n");
     */
     printPASS(5);
     free(uniqueIBAN);    
@@ -380,7 +384,7 @@ void performTransaction(
     int successfully = 0;
 
     // in work !
-    //CurrencyRates rates = fetch_currency_rates();
+    CurrencyRates rates = fetch_currency_rates();
 
     printf("Enter source account IBAN: ");
     scanf("%s", source_iban);
@@ -389,32 +393,120 @@ void performTransaction(
     printf("Enter destination IBAN: ");
     scanf("%s", dest_iban);
     printf("you entered iban: %s\n", dest_iban);
-    
+
     for (int i = 0; i< numAccounts; i++) {
         if (successfully) {
             break;
         }
         if (strcmp(accounts[i].IBAN, source_iban) == 0 && 
-            strcmp(accounts[i].owner.name, sysuser) == 0 &&
-            strcmp(accounts[i].owner.surname, syssurname) == 0){
-               if (accounts[i].amount >= amount) {
-                    for (int j = 0; j< numAccounts; j++) {
-                        /*********************** inplement here transactions between different coins exchange ***********************/
-                        if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+                strcmp(accounts[i].owner.name, sysuser) == 0 &&
+                strcmp(accounts[i].owner.surname, syssurname) == 0){
+            if (accounts[i].amount >= amount) {
+                for (int j = 0; j< numAccounts; j++) {
+                    /*********************** inplement here transactions between different coins exchange ***********************/
+                    /*if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+                      successfully = 1;
+                      if (accounts[i].coin == accounts[j].coin) {
+                      accounts[i].amount -= amount;
+                      accounts[j].amount += amount;
+                      }
 
-                            successfully = 1;
-                            accounts[i].amount -= amount;
-                            accounts[j].amount += amount;
-                            break;
+                      break;
+                      }*/
+                    if (strcmp(accounts[j].IBAN, dest_iban) == 0) {
+                        successfully = 1;
+                        printf("Ammount: %f was converted to:", amount);
+                        // Check if currency conversion is needed
+                        int source_coin = accounts[i].coin;
+                        int dest_coin = accounts[j].coin;
+                        double used_rate;
+                        /*for beauty info printing*/
 
+                        char source_coin_symbol[4];
+                        char destination_coin_symbol[4];
+
+                        // not touching this 
+                        switch (source_coin) {
+                            case 0:
+                                strcpy(source_coin_symbol,"RON");
+                                switch (dest_coin) {
+                                    case 1:
+                                        strcpy(destination_coin_symbol,"EUR");
+                                        // Convert from RON to EUR
+                                        amount *= rates.exRONtoexEUR;
+                                        used_rate = rates.exRONtoexEUR;
+                                        break;
+                                    case 2:
+                                        strcpy(destination_coin_symbol,"USD");
+                                        // Convert from RON to USD
+                                        amount *= rates.exRONtoexUSD;
+                                        used_rate = rates.exRONtoexUSD;
+                                        break;
+                                    default:
+                                        strcpy(destination_coin_symbol,"RON");
+                                        break;
+                                }
+                                break;
+                            case 1:
+                                strcpy(source_coin_symbol,"EUR");
+                                switch (dest_coin) {
+                                    case 0:
+                                        strcpy(destination_coin_symbol,"RON");
+                                        // Convert from EUR to RON
+                                        amount *= rates.exEURtoexRON;
+                                        used_rate = rates.exEURtoexRON;
+                                        break;
+                                    case 2:
+                                        strcpy(destination_coin_symbol,"USD");
+                                        // Convert from EUR to USD
+                                        amount *= rates.exEURtoexUSD;
+                                        used_rate = rates.exEURtoexUSD;
+                                        break;
+                                    default:
+                                        strcpy(destination_coin_symbol,"EUR");
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                strcpy(source_coin_symbol,"USD");
+                                switch (dest_coin) {
+                                    case 0:
+                                        strcpy(destination_coin_symbol,"RON");
+                                        // Convert from USD to RON
+                                        amount *= rates.exUSDtoexRON;
+                                        used_rate = rates.exUSDtoexRON;
+                                        break;
+                                    case 1:
+                                        strcpy(destination_coin_symbol,"EUR");
+                                        // Convert from USD to EUR
+                                        amount *= rates.exUSDtoexEUR;
+                                        used_rate = rates.exUSDtoexEUR;
+                                        break;
+                                    default:
+                                        strcpy(destination_coin_symbol,"USD");
+                                        break;
+                                }
+                                break;
+                            default:
+                                // Handle other cases if necessary
+                                break;
                         }
+                        printf("%f\n", amount);
+                        printf("Using the following Exchange Rate: \n%s/%s  = ",source_coin_symbol, destination_coin_symbol);
+                        printf("%.6f\n",used_rate);
+
+                        accounts[i].amount -= amount;
+                        accounts[j].amount += amount;
+                        break;
                     }
-               }else{
-                   printFAIL(4);
-                   break;
-               }
+                }
+            }else{
+                printFAIL(4);
+                break;
+            }
         } 
     }
+
     if (successfully) { printPASS(1);
     }else { printFAIL(3);}
 }
