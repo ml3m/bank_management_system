@@ -37,9 +37,9 @@ Makefile using gcc:
 
 ## Usage:
 ### Connect to an existing user in database
-    ./login [NAME] [SURNAME]
+    ./Mlembank -login/-l [NAME] [SURNAME]
 ### Create Account (new user)
-    ./login -c
+    ./Mlembank -create
 or
 
     ./login -create
