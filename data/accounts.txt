@@ -1,7 +1,7 @@
 EU111111 Jonny Man 1 400.00
 US789012 Bella Smith 2 2200.00
 EU345678 Bob Johnson 1 700.00
-EU682982 Alice Smith 1 51.66
+EU682982 Alice Smith 1 252.64
 EU278244 Florin Piersic 1 300.00
 EU838430 Mlem Vlad 1 0.00
 EU636599 Maria Popa 1 0.00
@@ -34,4 +34,4 @@ RO596693 cirpi cipri 0 0.00
 RO839953 andreea danut 0 0.00
 RO012525 denisa larisa 0 0.00
 RO119658 Alice Smith 0 1492.68
-RO567432 Alice Smith 0 1397.57
+RO567432 Alice Smith 0 397.57
