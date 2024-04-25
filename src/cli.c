@@ -6,9 +6,10 @@ Description: this file provides the required cli printing.
 GitHub: https://https://github.com/ml3m
 ================================================================================
 */
-#include "cli.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "../include/cli.h"
 
 void printUserAccounts(const char user_accounts[][9]){
     printf(ANSI_BOLD_START "Owned Accounts:\n\n" ANSI_COLOR_RESET);
@@ -37,13 +38,15 @@ void sayHello(const char *name, const char *surname){
 }
 
 void printMainMenu(){
-    printf(ANSI_BOLD_START"\n1. Edit Account\n");
-    printf("2. Delete Account\n");
-    printf("3. View Account\n");
-    printf("4. Perform Transaction\n");
-    printf("5. Create Account\n");
-    printf("6. See Exchange Rates\n");
-    printf("7. Exit\n\n"ANSI_COLOR_RESET);
+    printf                 ("┌──────────────────────┐\n");
+    printf  (ANSI_BOLD_START"│1. Edit Account       │\n");
+    printf                 ("│2. Delete Account     │\n");
+    printf                 ("│3. View Account       │\n");
+    printf                 ("│4. Perform Transaction│\n");
+    printf                 ("│5. Create Account     │\n");
+    printf                 ("│6. See Exchange Rates │\n");
+    printf                 ("│7. Exit               │\n"ANSI_COLOR_RESET);
+    printf                 ("└──────────────────────┘\n\n");
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 
@@ -52,11 +55,13 @@ void printEditAccount(const char *iban){
     printf(ANSI_COLOR_BLACK GREEN_BACKGROUND "\nAccount found "ANSI_COLOR_RESET);
     printf("\n\nEditing account: ");
     printf(ANSI_BOLD_START "%s\n", iban);
-    printf("\n1. Change owner's name\n");
-    printf("2. Change owner's surname\n");
-    printf("3. Change currency type\n");
-    printf("4. Change currency ammount\n");
-    printf("5. Renew IBAN\n\n"ANSI_COLOR_RESET);
+    printf("\n┌──────────────────────────┐\n");
+    printf  ("│1. Change owner's name    │\n");
+    printf  ("│2. Change owner's surname │\n");
+    printf  ("│3. Change currency type   │\n");
+    printf  ("│4. Change currency ammount│\n");
+    printf  ("│5. Renew IBAN             │\n"ANSI_COLOR_RESET);
+    printf  ("└──────────────────────────┘\n\n");
     printf(ANSI_COLOR_MAGENTA"Enter your choice: "ANSI_COLOR_RESET);
 }
 

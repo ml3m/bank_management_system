@@ -6,15 +6,16 @@ Description: bank main functions that provide the core functionality.
 GitHub: https://https://github.com/ml3m
 ================================================================================
 */
-#include "bank.h"
-#include "cli.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <time.h>
-#include "iban_generator.h"
-#include "api_handling.h"
-#include "paths.h"
+
+#include "../include/iban_generator.h"
+#include "../include/api_handling.h"
+#include "../include/paths.h"
+#include "../include/bank.h"
+#include "../include/cli.h"
 
 
 /*works like a charm*/
@@ -92,7 +93,7 @@ void createAccount(Account *accounts, int *numAccounts){
 void editAccount(Account *accounts, const int numAccounts) {
     char iban[MAX_IBAN_LENGTH];
 
-    /***********implement fetch rates here************/
+    /***********fetch rates here************/
     CurrencyRates rates = fetch_currency_rates();
 
     editHeader();
@@ -215,7 +216,7 @@ void editAccount(Account *accounts, const int numAccounts) {
                     }
                     break;
                 case 5:
-                    printf("Old IBAN: %s\n", accounts[i].IBAN);
+                    printf("\n\nOld IBAN: %s\n", accounts[i].IBAN);
                     char *newuniqueIBAN = generateUniqueIBAN(accounts, numAccounts);
                     printf("New IBAN generating...\n");
                     printf("generated IBAN: %s\n", newuniqueIBAN);
@@ -232,7 +233,8 @@ void editAccount(Account *accounts, const int numAccounts) {
                         accounts[i].IBAN[0]= 'U';
                         accounts[i].IBAN[1]= 'S';
                     }
-                    printf("New IBAN: %s\n", accounts[i].IBAN);
+                    printf("New IBAN: ");
+                    printf(ANSI_BOLD_START"%s\n"ANSI_COLOR_RESET, accounts[i].IBAN);
                     break;
                 
                 default:
@@ -288,24 +290,27 @@ void viewAccount(const Account *accounts, const int numAccounts) {
     for (int i = 0; i< numAccounts; i++) {
         if(strcmp(accounts[i].IBAN,iban)== 0){
            found = 1; 
-           printf("AC: %s", accounts[i].IBAN);
-           printf(">Account Details:\n");
-           printf("IBAN: %s\n", accounts[i].IBAN);
-           printf("Owner: %s %s\n", accounts[i].owner.name, accounts[i].owner.surname);
-           printf("Amount: %.2f\n", accounts[i].amount);
+
+         printf("\n┌──────────────────────────┐\n");
+           printf("│     AC: %s                    \n", accounts[i].IBAN);
+           printf("│     >Account Details:         \n");
+           printf("│     IBAN: %s                  \n", accounts[i].IBAN);
+           printf("│     Owner: %s %s              \n", accounts[i].owner.name, accounts[i].owner.surname);
+           printf("│     Amount: %.2f              \n", accounts[i].amount);
            switch(accounts[i].coin) {
                case RON:
-                   printf("Currency: RON\n");
+           printf("│     Currency: RON             \n");
                    break;
                case EUR:
-                   printf("Currency: EUR\n");
+           printf("│     Currency: EUR             \n");
                    break;
                case USD:
-                   printf("Currency: USD\n");
+           printf("│     Currency: USD             \n");
                    break;
                default:
-                   printf("Currency: Unknown\n");
+           printf("│     Currency: Unknown         \n");
            }
+         printf  ("└──────────────────────────┘\n\n");
         }
     }
     if(!found)printFAIL(11);

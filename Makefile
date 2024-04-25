@@ -1,4 +1,4 @@
 final:
-	gcc -o login ./src/*.c -I./include -Wall -Werror -lcurl
+	gcc -o Mlembank ./src/*.c -I./include -Wall -Werror -lcurl
 clean:
-	rm -rf login
+	rm -rf Mlembank 

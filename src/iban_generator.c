@@ -7,12 +7,13 @@ GitHub: https://https://github.com/ml3m
 ================================================================================
 */
 
-#include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#include "bank.h"
-#include "cli.h"
+#include <stdio.h>
+#include <time.h>
+
+#include "../include/bank.h"
+#include "../include/cli.h"
 
 char* generateIBAN() {
     srand(time(NULL)); // this line is cool

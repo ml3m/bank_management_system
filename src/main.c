@@ -10,21 +10,21 @@ Description: main function :)
 GitHub: https://https://github.com/ml3m
 ================================================================================
 */
-
-#include "bank.h"
-#include "cli.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include "api_handling.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "../include/api_handling.h"
+#include "../include/bank.h"
+#include "../include/cli.h"
 
 int main(int argc, char *argv[]) {
     
-    if (argc == 1 || argc >3){
-        printf("Usage1: %s [NAME] [SURNAME]\n", argv[0]);
-        printf("Usage2: %s -create/-c [NAME] [SURNAME]\n", argv[0]);
+    if (argc == 1 || argc >4 || argc == 3){
+        printf("Usage1: %s -login/-l [NAME] [SURNAME]\n", argv[0]);
+        printf("Usage2: %s -create/-c\n", argv[0]);
         return 1;
-    } 
+    }
 
     char user_accounts[MAX_USER_ACCOUNTS][MAX_IBAN_LENGTH];
     Account accounts[MAX_ACCOUNTS];
@@ -54,8 +54,14 @@ int main(int argc, char *argv[]) {
         surname= accounts[numAccounts -1].owner.surname;
 
     }else {
-        name = argv[1];
-        surname = argv[2];
+        if (strcmp(argv[1],"-l")==0 || strcmp(argv[1],"-login")==0) {
+            name = argv[2];
+            surname = argv[3];
+        }else {
+            printf("Usage1: %s -login/-l [NAME] [SURNAME]\n", argv[0]);
+            printf("Usage2: %s -create/-c\n", argv[0]);
+            return 1;
+        }
     }
 
     /********** just some very serious testing here *************************
