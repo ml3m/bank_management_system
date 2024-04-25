@@ -1,3 +1,8 @@
+##
+
+<p width="200" align="center"><img src="./assets/33.png" /></a></p>
+
+
 ## Features
 ### Account Creation: 
 - Allows bank staff to create new customer accounts by inputting necessary details such as name, surname, currency, etc.
@@ -51,6 +56,3 @@ or
 
 <p width="200" align="center"><img src="./assets/22.png" /></a></p>
 
-##
-
-<p width="200" align="center"><img src="./assets/33.png" /></a></p>
