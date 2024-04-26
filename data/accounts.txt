@@ -1,13 +1,11 @@
 EU111111 Jonny Man 1 400.00
 US789012 Bella Smith 2 2200.00
-EU345678 Bob Johnson 1 700.00
 EU682982 Alice Smith 1 252.64
 EU278244 Florin Piersic 1 300.00
 EU838430 Mlem Vlad 1 0.00
 EU636599 Maria Popa 1 0.00
 US123111 Marius Ioan 2 12.00
 RO494309 Popa Darius 0 0.00
-EU544672 Ifju Alexandra 1 0.00
 US325616 Flonta Melisa 2 0.00
 EU058913 Tehen Larisa 1 0.00
 RO648709 lol lool 0 0.00
@@ -16,15 +14,10 @@ EU738675 Maria Manu 1 0.00
 US645672 mama mama 2 0.00
 EU196296 tata tata 1 0.00
 RO458363 popa popa 0 0.00
-EU603812 dunca maria 1 0.00
 RO937144 daniel lapusneanu 0 999.00
 US803786 Stefan Popesco 2 123.00
-EU618866 test test 1 222.00
-RO978993 test1 test2 0 2122.00
 EU891086 Delia Matache 1 192.00
 RO945729 Alexandra Stan 0 0.00
-RO934374 lol mleem 0 0.00
-US778060 lola ana 2 0.00
 US595914 Alice Smith 2 213.12
 US054586 Vladimir Tepes 2 0.00
 RO017776 mlem_test sushi_test 0 0.00
@@ -33,5 +26,6 @@ RO270025 cipri cipri 0 0.00
 RO596693 cirpi cipri 0 0.00
 RO839953 andreea danut 0 0.00
 RO012525 denisa larisa 0 0.00
-RO119658 Alice Smith 0 1492.68
+RO119658 Alice Smith 0 66492.68
 RO567432 Alice Smith 0 397.57
+RO160148 foo foo 0 0.00

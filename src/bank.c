@@ -191,8 +191,10 @@ void editAccount(Account *accounts, const int numAccounts) {
                     break;
                 case 4:
                     printf("Select balance option:\n");
-                    printf("1. Withdraw\n");
-                    printf("2. Deposit\n");
+                    printf("┌───────────────┐\n");
+                    printf("│ 1. Withdraw   │\n");
+                    printf("│ 2. Deposit    │\n");
+                    printf("└───────────────┘\n\n");
                     int option;
                     int option_amount;
                     scanf("%d", &option);
